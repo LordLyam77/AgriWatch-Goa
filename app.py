@@ -368,7 +368,7 @@ I18N = {
         "tab_command": "🌾 Goa Command Center",
         "tab_simulator": "🧪 AI Stress Simulator & XAI",
         "tab_scanner": "📸 Leaf Disease Vision AI",
-        "tab_card": "📄 Official Kisan Health Card",
+        "tab_card": "📄 Digital Kisan Health Card",
         "tab_forecast": "📈 5-Day Agro Forecast",
         "tab_alerts": "🚨 Farm Advisory & SMS",
         "tab_ethics": "🛡️ Responsible AI & Ethics",
@@ -393,13 +393,13 @@ I18N = {
         "sim_rain": "24-Hour Rainfall (mm)",
         "sim_soil_moist": "Soil Moisture (%)",
         "sim_diag_output": "3. AI Predictive Output & Risk Decomposition",
-        "icar_actions_title": "📋 ICAR-CCARI Prescribed Protocol (English)",
+        "icar_actions_title": "📋 ICAR-CCARI Based Agricultural Guidance (English)",
         "regional_advisory_title": "🌾 प्रादेशिक शेतकरी सल्लो (Regional Farmer Advisory)",
         "wa_share_btn": "📲 Share Advisory to Village WhatsApp Group",
         "scanner_title": "📸 Multi-Modal Leaf Visual Disease Scanner",
-        "scanner_caption": "Fuses computer vision colorimetry & necrotic lesion detection with real-time Goa taluka microclimates for enhanced diagnostic accuracy.",
-        "card_title": "📄 Official Kisan Crop Health & Vulnerability Card",
-        "card_caption": "Certified agro-meteorological advisory card for ZAO subsidy verification, PMFBY crop insurance claims, and village panchayat records."
+        "scanner_caption": "Combines computer vision colorimetry & necrotic lesion analysis with real-time Goa taluka microclimates for enhanced diagnostic assessment.",
+        "card_title": "📄 Digital Kisan Crop Health & Vulnerability Card (Prototype)",
+        "card_caption": "Prototype agro-meteorological advisory card demonstrating potential integration for ZAO subsidy review, PMFBY damage documentation, and panchayat records."
     },
     "कोंकणी (Konkani)": {
         "app_title": "🌾 AgriWatch Goa — AI पिकाचो ताण व शेतकरी पूर्व-सूचना प्रणाली",
@@ -440,8 +440,8 @@ I18N = {
         "wa_share_btn": "📲 गांवाच्या व्हॉट्सॲप (WhatsApp) ग्रुपाचेर सल्लो वाटा",
         "scanner_title": "📸 मल्टी-मॉडल पानां रोग तपासणी स्कॅनर",
         "scanner_caption": "पानांच्या फोटोचेर आदारित AI आणि गोंयच्या हवामानाचे एकत्रीकरण करून अचूक रोग निदान करा.",
-        "card_title": "📄 अधिकृत शेतकरी पीक आरोग्य पत्रिका (Kisan Health Card)",
-        "card_caption": "शेतकी खाते (Directorate of Agriculture) व ICAR-CCARI मान्यताप्राप्त अधिकृत आरोग्य पत्रिका."
+        "card_title": "📄 शेतकरी पीक आरोग्य पत्रिका (Digital Kisan Card Prototype)",
+        "card_caption": "शेतकी खाते (Directorate of Agriculture) व ICAR-CCARI मार्गदर्शक तत्त्वांचेर आदारित डिजिटल आरोग्य पत्रिका नमुना."
     },
     "हिन्दी (Hindi)": {
         "app_title": "🌾 AgriWatch Goa — AI फसल तनाव पहचान एवं किसान पूर्व-चेतावनी प्रणाली",
@@ -452,7 +452,7 @@ I18N = {
         "tab_command": "🌾 गोवा कमान केंद्र",
         "tab_simulator": "🧪 AI तनाव सिम्युलेटर एवं XAI",
         "tab_scanner": "📸 पत्ती रोग स्कैनर (Vision AI)",
-        "tab_card": "📄 आधिकारिक किसान स्वास्थ्य कार्ड",
+        "tab_card": "📄 डिजिटल किसान स्वास्थ्य कार्ड (प्रारूप)",
         "tab_forecast": "📈 ५-दिवसीय मौसम पूर्वानुमान",
         "tab_alerts": "🚨 किसान सलाह व SMS संदेश",
         "tab_ethics": "🛡️ जिम्मेदार AI एवं नैतिकता",
@@ -482,8 +482,8 @@ I18N = {
         "wa_share_btn": "📲 गाँव के व्हाट्सएप (WhatsApp) ग्रुप पर साझा करें",
         "scanner_title": "📸 मल्टी-मॉडल पत्ती रोग दृश्य स्कैनर",
         "scanner_subtitle": "पत्ती के चित्रों का कंप्यूटर विज़न विश्लेषण और वास्तविक समय गोवा मौसम का संलयन।",
-        "card_title": "📄 आधिकारिक किसान फसल स्वास्थ्य एवं भेद्यता कार्ड",
-        "card_caption": "कृषि निदेशालय (Goa) एवं ICAR-CCARI प्रमाणित आधिकारिक फसल स्वास्थ्य प्रमाणपत्र।"
+        "card_title": "📄 डिजिटल किसान फसल स्वास्थ्य एवं भेद्यता कार्ड (प्रारूप)",
+        "card_caption": "कृषि निदेशालय एवं ICAR-CCARI मार्गदर्शिका पर आधारित डिजिटल फसल स्वास्थ्य पत्र का प्रोटोटाइप प्रारूप।"
     }
 }
 
@@ -1433,125 +1433,130 @@ with tab4:
 <div style="font-size: 1.15rem; font-weight: 800; color: #064E3B; letter-spacing: 0.05em; text-transform: uppercase;">
 Government of Goa • Directorate of Agriculture
 </div>
-<div style="font-size: 0.85rem; color: #047857; font-weight: 600;">
-In Technical Collaboration with ICAR - Central Coastal Agricultural Research Institute (CCARI), Old Goa
-</div>
-<div style="font-size: 1.25rem; font-weight: 800; color: #0F172A; margin-top: 8px; border-top: 1px solid #CBD5E1; padding-top: 6px;">
-OFFICIAL KISAN CROP HEALTH & VULNERABILITY ADVISORY CARD
-</div>
-<div style="font-size: 0.88rem; font-weight: 600; color: #64748B;">
-शेतकरी पीक आरोग्य व हवामान ताण पत्रिका
-</div>
-<div style="font-size: 0.78rem; color: #64748B; margin-top: 4px;">
-Card Serial ID: <b>{card_id}</b> • Generated: <b>{current_date_str}</b> • Powered by AgriWatch Goa
-</div>
-</div>
-<div style="font-size: 0.85rem; font-weight: 700; color: #047857; margin-bottom: 6px; text-transform: uppercase;">
-1. Farmer & Agronomic Profile
-</div>
-<div class="kisan-grid">
-<div class="kisan-data-cell">
-<div class="kisan-data-label">Farmer Name</div>
-<div class="kisan-data-val">{card_farmer}</div>
-</div>
-<div class="kisan-data-cell">
-<div class="kisan-data-label">Taluka & District</div>
-<div class="kisan-data-val">{card_taluka} ({t_district})</div>
-</div>
-<div class="kisan-data-cell">
-<div class="kisan-data-label">Land Parcel / Survey</div>
-<div class="kisan-data-val">{card_survey}</div>
-</div>
-<div class="kisan-data-cell">
-<div class="kisan-data-label">Crop & Variety</div>
-<div class="kisan-data-val">{card_crop}</div>
-</div>
-</div>
-<div style="font-size: 0.85rem; font-weight: 700; color: #047857; margin-bottom: 6px; text-transform: uppercase;">
-2. Real-Time Agro-Climatic & Soil Telemetry
-</div>
-<div class="kisan-grid">
-<div class="kisan-data-cell">
-<div class="kisan-data-label">Ambient Temp</div>
-<div class="kisan-data-val">{t_temp} °C</div>
-</div>
-<div class="kisan-data-cell">
-<div class="kisan-data-label">Relative Humidity</div>
-<div class="kisan-data-val">{t_hum}%</div>
-</div>
-<div class="kisan-data-cell">
-<div class="kisan-data-label">24h Rainfall</div>
-<div class="kisan-data-val">{t_rain} mm</div>
-</div>
-<div class="kisan-data-cell">
-<div class="kisan-data-label">Soil Moisture</div>
-<div class="kisan-data-val">{t_moist}%</div>
-</div>
-<div class="kisan-data-cell">
-<div class="kisan-data-label">Soil pH (Laterite)</div>
-<div class="kisan-data-val">{t_ph} (Acidic)</div>
-</div>
-<div class="kisan-data-cell">
-<div class="kisan-data-label">Soil Type</div>
-<div class="kisan-data-val">{t_soil_type}</div>
-</div>
-<div class="kisan-data-cell">
-<div class="kisan-data-label">Wet / Dry Days</div>
-<div class="kisan-data-val">{t_wet} wet / {t_dry} dry</div>
-</div>
-<div class="kisan-data-cell">
-<div class="kisan-data-label">Wind Speed</div>
-<div class="kisan-data-val">{t_wind} km/h</div>
-</div>
-</div>
-<div style="background: {grade_color}10; border: 2px solid {grade_color}; border-radius: 10px; padding: 14px 18px; margin-bottom: 18px;">
-<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-<div>
-<div style="font-size: 0.75rem; color: #64748B; font-weight: 700; text-transform: uppercase;">
-AI Agro-Stress Classification Result
-</div>
-<div style="font-size: 1.25rem; font-weight: 800; color: {grade_color}; margin-top: 2px;">
-{risk_grade}
-</div>
-</div>
-<div style="font-size: 1rem; font-weight: 800; color: {grade_color};">
-Composite Stress Index: {card_pred['overall_probability']*100:.1f}%
-</div>
-</div>
-<div style="font-size: 0.85rem; color: #334155; margin-top: 6px;">
-{grade_desc}
-</div>
-<div style="font-size: 0.82rem; color: #0F172A; margin-top: 6px;">
-<b>Primary Stresses Detected:</b> {', '.join(card_pred['top_concerns']).upper() if card_pred['top_concerns'] else 'NO ACTIVE STRESS'}
-</div>
-</div>
-<div style="font-size: 0.85rem; font-weight: 700; color: #047857; margin-bottom: 6px; text-transform: uppercase;">
-3. Mandatory ICAR-CCARI Remediation Protocol
-</div>
-<div style="background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 8px; padding: 12px 16px; margin-bottom: 18px; font-size: 0.88rem; line-height: 1.5; color: #1E293B;">
-<b>Scientific Prescription (English):</b><br>
-{card_pred['recommended_actions'][0] if card_pred['recommended_actions'] else 'Maintain optimal furrow drainage and regular observation.'}<br><br>
-<b>प्रादेशिक शेतकरी मार्गदर्शक (कोंकणी - देवनागरी):</b><br>
-{card_pred['konkani_advisories'][0] if card_pred.get('konkani_advisories') else 'पिकाची योग्य निगा राखा व शेतकी अधिकाऱ्यांच्या संपर्कांत राव्यात.'}
-</div>
-<div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #CBD5E1; padding-top: 14px; margin-top: 10px; font-size: 0.78rem; color: #64748B;">
-<div>
-<b>VALIDATED BY:</b><br>
-Krishi Vigyan Kendra (KVK), Old Goa<br>
-Directorate of Agriculture, Govt. of Goa<br>
-Kisan Call Centre Toll-Free: <b>1800-180-1551</b>
-</div>
-<div style="text-align: center;">
-<div style="font-size: 1.5rem;">[ 🔲 QR CERTIFIED ]</div>
-<div style="font-size: 0.7rem; color: #94A3B8;">HASH: {abs(hash(card_id)) % 100000000:08d}</div>
-</div>
-<div style="text-align: right;">
-<div style="height: 30px;"></div>
-<b>AUTHORIZED SIGNATURE</b><br>
-Zonal Agricultural Officer (ZAO)
-</div>
-</div>
-</div>
+                <div style="font-size: 0.85rem; color: #047857; font-weight: 600;">
+                    Advisories Formulated Based on Guidance from ICAR - Central Coastal Agricultural Research Institute (CCARI), Old Goa
+                </div>
+                <div style="font-size: 1.25rem; font-weight: 800; color: #0F172A; margin-top: 8px; border-top: 1px solid #CBD5E1; padding-top: 6px;">
+                    DIGITAL KISAN CROP HEALTH & VULNERABILITY ADVISORY CARD (PROTOTYPE)
+                </div>
+                <div style="font-size: 0.88rem; font-weight: 600; color: #64748B;">
+                    शेतकरी पीक आरोग्य व हवामान ताण पत्रिका
+                </div>
+                <div style="font-size: 0.78rem; color: #64748B; margin-top: 4px;">
+                    Card Tracking ID: <b>{card_id}</b> • Generated: <b>{current_date_str}</b> • Prototype by AgriWatch Goa
+                </div>
+            </div>
+
+            <div style="font-size: 0.85rem; font-weight: 700; color: #047857; margin-bottom: 6px; text-transform: uppercase;">
+                1. Farmer & Agronomic Profile
+            </div>
+            <div class="kisan-grid">
+                <div class="kisan-data-cell">
+                    <div class="kisan-data-label">Farmer Name</div>
+                    <div class="kisan-data-val">{card_farmer}</div>
+                </div>
+                <div class="kisan-data-cell">
+                    <div class="kisan-data-label">Taluka & District</div>
+                    <div class="kisan-data-val">{card_taluka} ({t_district})</div>
+                </div>
+                <div class="kisan-data-cell">
+                    <div class="kisan-data-label">Land Parcel / Survey</div>
+                    <div class="kisan-data-val">{card_survey}</div>
+                </div>
+                <div class="kisan-data-cell">
+                    <div class="kisan-data-label">Crop & Variety</div>
+                    <div class="kisan-data-val">{card_crop}</div>
+                </div>
+            </div>
+
+            <div style="font-size: 0.85rem; font-weight: 700; color: #047857; margin-bottom: 6px; text-transform: uppercase;">
+                2. Real-Time Agro-Climatic & Soil Telemetry
+            </div>
+            <div class="kisan-grid">
+                <div class="kisan-data-cell">
+                    <div class="kisan-data-label">Ambient Temp</div>
+                    <div class="kisan-data-val">{t_temp} °C</div>
+                </div>
+                <div class="kisan-data-cell">
+                    <div class="kisan-data-label">Relative Humidity</div>
+                    <div class="kisan-data-val">{t_hum}%</div>
+                </div>
+                <div class="kisan-data-cell">
+                    <div class="kisan-data-label">24h Rainfall</div>
+                    <div class="kisan-data-val">{t_rain} mm</div>
+                </div>
+                <div class="kisan-data-cell">
+                    <div class="kisan-data-label">Soil Moisture</div>
+                    <div class="kisan-data-val">{t_moist}%</div>
+                </div>
+                <div class="kisan-data-cell">
+                    <div class="kisan-data-label">Soil pH (Laterite)</div>
+                    <div class="kisan-data-val">{t_ph} (Acidic)</div>
+                </div>
+                <div class="kisan-data-cell">
+                    <div class="kisan-data-label">Soil Type</div>
+                    <div class="kisan-data-val">{t_soil_type}</div>
+                </div>
+                <div class="kisan-data-cell">
+                    <div class="kisan-data-label">Wet / Dry Days</div>
+                    <div class="kisan-data-val">{t_wet} wet / {t_dry} dry</div>
+                </div>
+                <div class="kisan-data-cell">
+                    <div class="kisan-data-label">Wind Speed</div>
+                    <div class="kisan-data-val">{t_wind} km/h</div>
+                </div>
+            </div>
+
+            <div style="background: {grade_color}10; border: 2px solid {grade_color}; border-radius: 10px; padding: 14px 18px; margin-bottom: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <div>
+                        <div style="font-size: 0.75rem; color: #64748B; font-weight: 700; text-transform: uppercase;">
+                            AI Agro-Stress Classification Result
+                        </div>
+                        <div style="font-size: 1.25rem; font-weight: 800; color: {grade_color}; margin-top: 2px;">
+                            {risk_grade}
+                        </div>
+                    </div>
+                    <div style="font-size: 1rem; font-weight: 800; color: {grade_color};">
+                        Composite Stress Index: {card_pred['overall_probability']*100:.1f}%
+                    </div>
+                </div>
+                <div style="font-size: 0.85rem; color: #334155; margin-top: 6px;">
+                    {grade_desc}
+                </div>
+                <div style="font-size: 0.82rem; color: #0F172A; margin-top: 6px;">
+                    <b>Primary Stresses Evaluated:</b> {', '.join(card_pred['top_concerns']).upper() if card_pred['top_concerns'] else 'NO ACTIVE STRESS'}
+                </div>
+            </div>
+
+            <div style="font-size: 0.85rem; font-weight: 700; color: #047857; margin-bottom: 6px; text-transform: uppercase;">
+                3. Recommended ICAR-CCARI Based Remediation Guidance
+            </div>
+            <div style="background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 8px; padding: 12px 16px; margin-bottom: 18px; font-size: 0.88rem; line-height: 1.5; color: #1E293B;">
+                <b>Agronomic Advisory (English):</b><br>
+                {card_pred['recommended_actions'][0] if card_pred['recommended_actions'] else 'Maintain optimal furrow drainage and regular observation.'}<br><br>
+                <b>प्रादेशिक शेतकरी मार्गदर्शक (कोंकणी - देवनागरी):</b><br>
+                {card_pred['konkani_advisories'][0] if card_pred.get('konkani_advisories') else 'पिकाची योग्य निगा राखा व शेतकी अधिकाऱ्यांच्या संपर्कांत राव्यात.'}
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #CBD5E1; padding-top: 14px; margin-top: 10px; font-size: 0.78rem; color: #64748B;">
+                <div>
+                    <b>PROPOSED INTEGRATION WITH:</b><br>
+                    Krishi Vigyan Kendra (KVK), Old Goa<br>
+                    Directorate of Agriculture, Govt. of Goa<br>
+                    Kisan Call Centre Toll-Free: <b>1800-180-1551</b>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5rem;">[ 🔲 QR VERIFICATION ]</div>
+                    <div style="font-size: 0.7rem; color: #94A3B8;">HASH: {abs(hash(card_id)) % 100000000:08d}</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="height: 30px;"></div>
+                    <b>VERIFICATION / COUNTERSIGN</b><br>
+                    Zonal Agricultural Officer (ZAO) / Field Assistant
+                </div>
+            </div>
+        </div>
 """
     clean_card_html = "\n".join(line.strip() for line in card_html_raw.strip().split("\n") if line.strip())
     st.markdown(clean_card_html, unsafe_allow_html=True)

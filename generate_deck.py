@@ -170,7 +170,7 @@ def create_deck():
     s2 = prs.slides.add_slide(blank_layout)
     add_bg(s2)
     add_header(s2, "Speaker 1", "The Silent Agricultural Crisis in Goa's 12 Talukas",
-               "Why Goa's 1.5 Lakh+ agrarian families lose 30-40% yield before detection", "Public-Service Relevance (25 Marks)")
+               "How unmonitored microclimatic stress impacts Goa's smallholder agrarian families", "Public-Service Relevance (25 Marks)")
 
     add_card(s2, 0.8, 1.8, 3.6, 5.0, "🌴 The Goan Reality", [
         ("1.5 Lakh+ Families:", "Directly depend on agriculture for their livelihood across coastal and hinterland talukas."),
@@ -180,22 +180,22 @@ def create_deck():
     ], border_color=C_CARD_BORDER, header_color=C_CYAN)
 
     add_card(s2, 4.8, 1.8, 3.6, 5.0, "⚠️ The Core Problem", [
-        ("The 'Too-Late' Dilemma:", "By the time fungal blast, cashew dieback, or root rot is visible to the naked eye, 30% to 40% of crop yield is already permanently lost."),
-        ("Reactive Support:", "Current government schemes compensate after destruction occurs. There is zero pre-emptive warning."),
-        ("Economic Hemorrhage:", "Goa's agrarian economy loses ₹50 to 80 Crores annually in preventable crop damage.")
+        ("The 'Too-Late' Dilemma:", "By the time fungal blast, cashew dieback, or root rot is visible to the naked eye, crop damage has already set in, making recovery difficult."),
+        ("Reactive Support:", "Current government schemes often compensate only after losses occur. Actionable early warnings are urgently needed."),
+        ("Compounding Economic Impact:", "Small and marginal farmers face severe financial shocks when unexpected weather anomalies ruin harvests.")
     ], border_color=C_RED, header_color=C_RED)
 
-    add_card(s2, 8.8, 1.8, 3.7, 5.0, "❓ The Million-Dollar Question", [
-        ("The Hypothesis:", "What if the Goa Agriculture Department could detect invisible physiological crop stress 5 to 7 days BEFORE physical symptoms ever appear?"),
-        ("The Mission:", "Bridge advanced meteorology, multi-target machine learning, and vernacular communication into a low-cost public early-warning utility.")
+    add_card(s2, 8.8, 1.8, 3.7, 5.0, "❓ The Core Challenge", [
+        ("The Hypothesis:", "What if agricultural officers could detect invisible physiological crop stress days BEFORE physical crop failure occurs?"),
+        ("The Mission:", "Bridge advanced meteorology, multi-target machine learning, and vernacular communication into a low-cost public early-warning prototype.")
     ], border_color=C_EMERALD, header_color=C_EMERALD)
 
     s2.notes_slide.notes_text_frame.text = (
         "SPEAKER 1 CUE:\n"
         "Judges, across Goa's 12 talukas, from the low-lying Khazan fields of Salcete to the cashew slopes of Sattari, "
-        "over 1.5 lakh farming families face a silent catastrophe every monsoon. By the time an elderly farmer notices "
-        "yellowing leaves or fungal lesions, 30 to 40 percent of the harvest is already destroyed. "
-        "Current support is entirely reactive. We asked: What if we predicted stress days before visible damage appears?"
+        "over 1.5 lakh farming families face recurring microclimatic uncertainties every monsoon. By the time an elderly farmer notices "
+        "visible lesions or rot, damage has already set in. Today, agricultural support is predominantly reactive—compensating after disaster strikes. "
+        "We asked: What if we could detect and flag crop stress days before physical damage becomes irreversible?"
     )
 
     # =========================================================================
@@ -207,25 +207,25 @@ def create_deck():
                "Hyper-localized, predictive agro-meteorological intelligence for Goa", "Public-Service Relevance (25 Marks)")
 
     add_card(s3, 0.8, 1.8, 5.6, 5.0, "✨ What Makes AgriWatch Unique", [
-        ("🔮 Predictive, Not Reactive:", "Forecasts physiological stress thresholds using live weather & soil telemetry instead of waiting for leaf death."),
+        ("🔮 Predictive, Not Reactive:", "Forecasts physiological stress thresholds using live weather & soil telemetry instead of waiting for visible leaf damage."),
         ("📍 Hyper-Localized to 12 Talukas:", "Pre-configured geospatial coordinates, soil profiles, and primary cropping calendars for all Goa talukas."),
         ("🌐 Trilingual Vernacular Engine:", "Native Konkani (गोंयची राजभास in Devanagari), Hindi, and English—zero language barriers."),
-        ("🌱 ICAR-CCARI Prescriptions:", "Scientifically verified remedies from the Central Coastal Agricultural Research Institute (Old Goa).")
+        ("🌱 ICAR-CCARI Guidance:", "Advisories structured on verified agricultural guidance from the Central Coastal Agricultural Research Institute (Old Goa).")
     ], header_color=C_EMERALD)
 
     add_card(s3, 6.8, 1.8, 5.7, 5.0, "🎯 Scoring Criteria Alignment (100 Marks)", [
-        ("Public-Service Relevance (25/25):", "Directly empowers 1.5L+ small and marginal farmers, preventing catastrophic rural debt."),
-        ("Prototype & Feasibility (25/25):", "100% operational live dashboard running locally on Streamlit with zero mock slides."),
+        ("Public-Service Relevance (25/25):", "Focuses on small and marginal farmers vulnerable to sudden weather anomalies."),
+        ("Prototype & Feasibility (25/25):", "100% operational live dashboard running locally on Streamlit with interactive features."),
         ("Innovation & Use of AI (20/20):", "Multi-Target Random Forest Classifiers + Explainable AI + Leaf Vision Fusion."),
-        ("Scalability & Adoption (15/15):", "Deploys on 190+ Village Panchayat e-Gram kiosks and 2G SMS networks."),
-        ("Responsible AI (10/10):", "Zero Citizen PII collected, DPDP Act 2023 compliant, and taluka fairness audited.")
+        ("Scalability & Adoption (15/15):", "Proposed roadmap for 190+ Village Panchayat kiosks and basic 2G SMS networks."),
+        ("Responsible AI (10/10):", "Privacy by design: operates with zero farmer PII and includes taluka fairness checks.")
     ], border_color=C_CYAN, header_color=C_CYAN)
 
     s3.notes_slide.notes_text_frame.text = (
         "SPEAKER 1 CUE:\n"
         "AgriWatch Goa shifts agricultural defense from reactive disaster compensation to proactive, preventative intelligence. "
         "It integrates real-time telemetry from all 12 Goa talukas, evaluates multi-target Random Forest models, "
-        "and prescribes ICAR-CCARI treatments in native Konkani. Now, I hand over to Speaker 2 to demonstrate our live working prototype."
+        "and pairs risk predictions with ICAR-CCARI based advisories in native Konkani. Now, Speaker 2 will demonstrate our working prototype."
     )
 
     # =========================================================================
@@ -244,25 +244,25 @@ def create_deck():
 
     add_card(s4, 4.8, 1.8, 3.6, 5.0, "2. AI Inference & XAI", [
         ("StandardScaler Pipeline:", "Normalizes 11 numerical metrics with one-hot categorical taluka/crop encodings."),
-        ("Primary Random Forest:", "Predicts Overall Risk: Normal, Watch, Alert, Critical (91.86% Accuracy)."),
+        ("Primary Random Forest:", "Predicts Overall Risk: Normal, Watch, Alert, Critical (91.86% Accuracy on synthetic evaluation data)."),
         ("6 Binary Hazard Models:", "Isolates Drought, Waterlog, Pest, Disease, Heat, and Soil pH."),
         ("Explainable AI (XAI):", "Decomposes Gini feature drivers to explain why stress was flagged.")
     ], header_color=C_EMERALD)
 
     add_card(s4, 8.8, 1.8, 3.7, 5.0, "3. Multi-Channel Delivery", [
         ("Streamlit Command Center:", "8 interactive glassmorphic tabs with Folium GIS maps and Plotly graphs."),
-        ("Kisan Health Card:", "Official printable PDF certificate with serial ID and verification QR."),
+        ("Digital Kisan Health Card:", "Printable prototype advisory certificate with unique verification ID and QR code."),
         ("2G SMS Dispatcher:", "Concise SMS alerts via Twilio and WhatsApp group deep-links."),
-        ("CSV Audit Trail:", "Immutable dispatch history for government accountability.")
+        ("CSV Audit Trail:", "Timestamped dispatch history for administrative record-keeping.")
     ], header_color=C_AMBER)
 
     s4.notes_slide.notes_text_frame.text = (
         "SPEAKER 2 CUE:\n"
-        "Judges, our architecture is built for extreme robustness. "
+        "Judges, our architecture is engineered for practical deployment. "
         "Layer 1 ingests meteorological feeds from live APIs or deterministic Goan climatic simulations. "
-        "Layer 2 feeds 14 environmental variables through a StandardScaler pipeline into our primary Random Forest classifier "
+        "Layer 2 feeds environmental variables through a StandardScaler pipeline into our primary Random Forest classifier "
         "and 6 hazard-specific sub-models. Layer 3 dispatches bilingual advisories through our Streamlit dashboard, "
-        "printable Kisan Health Cards, and 2G SMS gateways."
+        "prototype digital Kisan Health Cards, and 2G SMS gateways."
     )
 
     # =========================================================================
@@ -295,32 +295,33 @@ def create_deck():
     )
 
     # =========================================================================
-    # SLIDE 6: Speaker 2 - Tab 4: The Official Kisan Crop Health Card
+    # SLIDE 6: Speaker 2 - Tab 4: Digital Kisan Crop Health Card (Prototype)
     # =========================================================================
     s6 = prs.slides.add_slide(blank_layout)
     add_bg(s6)
-    add_header(s6, "Speaker 2", "Tab 4: Official Kisan Crop Health & Vulnerability Card",
-               "A certified, printable agro-meteorological advisory certificate for Goan farmers", "Public-Service & Feasibility (25 Marks)")
+    add_header(s6, "Speaker 2", "Tab 4: Digital Kisan Crop Health & Vulnerability Card",
+               "A prototype printable agro-meteorological advisory card for Goan farmers", "Public-Service & Feasibility (25 Marks)")
 
-    add_card(s6, 0.8, 1.8, 5.6, 5.0, "📄 The Digital-to-Physical Bridge", [
-        ("Institutional Credibility:", "Branded under Directorate of Agriculture, Govt. of Goa, in technical collaboration with ICAR-CCARI (Old Goa)."),
-        ("Unique Cryptographic Serial ID:", "Auto-generated verification serial (e.g. GOA-KISAN-2026-PON-4819) with tamper-resistant verification hash."),
-        ("Farmer & Land Profile:", "Records farmer name, survey/parcel number, and Goan agro-ecological land types (Khazan, Morod, Keri)."),
-        ("Printable PDF Certificate:", "One-click native print engine (window.print()) formatted for village panchayat paper hand-outs.")
+    add_card(s6, 0.8, 1.8, 5.6, 5.0, "📄 Prototype for Government Agriculture Services", [
+        ("Digital-to-Physical Utility:", "Demonstrates how digital agro-advisories can be printed into physical format for village panchayat distribution."),
+        ("Unique Tracking ID:", "Auto-generates verification IDs (e.g. GOA-KISAN-2026-PON-4819) with verification QR codes."),
+        ("Farmer & Land Profile:", "Accommodates farmer name, survey/parcel number, and Goan agro-ecological land types (Khazan, Morod, Keri)."),
+        ("Native Print Engine:", "One-click browser print engine (window.print()) formatted for village panchayat paper hand-outs.")
     ], header_color=C_AMBER)
 
-    add_card(s6, 6.8, 1.8, 5.7, 5.0, "🏛️ Direct Government Utility", [
-        ("PMFBY Crop Insurance Claims:", "Provides undeniable, timestamped proof of weather anomalies and crop stress when filing for insurance after storms."),
-        ("ZAO Subsidy Verification:", "Zonal Agricultural Officers can instantly verify soil acidity (pH 5.2) to approve subsidized agricultural lime distribution."),
-        ("AI Health Grading System:", "Grades crops from Grade A (Optimal Health) to Grade D (Critical Stress Intervention), paired with actionable ICAR treatments.")
+    add_card(s6, 6.8, 1.8, 5.7, 5.0, "🏛️ Potential Government Integration", [
+        ("PMFBY Claim Support Concept:", "Demonstrates how timestamped weather telemetry could support farmers during crop damage assessments."),
+        ("ZAO Advisory Support:", "Assists Zonal Agricultural Officers in quickly reviewing localized soil and weather indicators for targeted advisory."),
+        ("AI Health Grading System:", "Grades crops from Grade A (Optimal Health) to Grade D (Critical Stress Intervention), paired with ICAR-CCARI guidance.")
     ], header_color=C_EMERALD)
 
     s6.notes_slide.notes_text_frame.text = (
         "SPEAKER 2 CUE:\n"
-        "Tab 4 generates an official, certified Kisan Crop Health Card. "
-        "It solves a massive bureaucratic gap: when unseasonal rains ruin a crop, farmers struggle to prove weather stress to insurance agents. "
-        "This printable card provides timestamped meteorological telemetry, a unique serial ID, QR code, and an AI health grade "
-        "that fast-tracks PMFBY insurance payouts and ZAO subsidy verification. Now Speaker 3 will reveal our AI brain."
+        "Tab 4 generates a prototype Digital Kisan Crop Health Card. "
+        "Our prototype demonstrates how such a digital card could be integrated into government agriculture services. "
+        "When unseasonal rains ruin a crop, farmers often struggle to document local weather conditions. "
+        "This printable card provides timestamped meteorological telemetry, a unique tracking ID, and an AI health grade "
+        "that can assist in agricultural assessments. Now Speaker 3 will reveal our AI engine."
     )
 
     # =========================================================================
@@ -329,30 +330,29 @@ def create_deck():
     s7 = prs.slides.add_slide(blank_layout)
     add_bg(s7)
     add_header(s7, "Speaker 3", "The AI Engine: Multi-Target Random Forest Architecture",
-               "Why machine learning outperforms rigid IF-THEN rules in Goan agriculture", "Innovation & Use of AI (20 Marks)")
+               "Evaluating multi-dimensional environmental signals across Goan agriculture", "Innovation & Use of AI (20 Marks)")
 
     add_card(s7, 0.8, 1.8, 5.6, 5.0, "🧠 Why Random Forests for Agriculture?", [
         ("Non-Linear Interactions:", "A single rule like 'Rain > 80mm = Waterlog' fails. 80mm in sloped Sattari after 10 dry days is beneficial; but 50mm in low-lying Salcete with 95% humidity causes blast and root rot."),
         ("Multi-Dimensional Synthesis:", "Simultaneously evaluates 14 environmental features without overfitting."),
-        ("Synthetic Goan Dataset:", "3,500 samples calibrated to 5 years of Goa seasonal weather patterns and lateritic soil chemistry.")
+        ("Synthetic Goan Calibration:", "Calibrated to Goan seasonal weather patterns, cropping calendars, and lateritic soil chemistry.")
     ], header_color=C_CYAN)
 
-    add_card(s7, 6.8, 1.8, 5.7, 5.0, "📊 Verified Model Benchmark Metrics", [
-        ("Primary Model Accuracy:", "91.86% Overall Accuracy | 96.38% Precision | 94.14% ROC-AUC"),
-        ("Drought Stress Model:", "97.54% Accuracy (detects dry spells & root moisture deficits)"),
-        ("Waterlog Stress Model:", "99.46% Accuracy (flags soil saturation & poor drainage)"),
-        ("Pest Infestation Model:", "97.94% Accuracy (predicts stem borer & tea mosquito bug)"),
-        ("Fungal Disease Model:", "98.94% Accuracy (calibrated to blast & bud rot triggers)"),
-        ("Thermal Heat Stress Model:", "99.54% Accuracy | Soil Nutrient/pH Model: 99.80% Accuracy")
+    add_card(s7, 6.8, 1.8, 5.7, 5.0, "📊 Evaluation Dataset Benchmark Metrics", [
+        ("Primary Model Evaluation:", "91.86% Accuracy | 96.38% Precision | 94.14% ROC-AUC on synthetic evaluation dataset."),
+        ("Drought Stress Sub-Model:", "97.54% Accuracy (detects dry spells & root moisture deficits)"),
+        ("Waterlog Stress Sub-Model:", "99.46% Accuracy (flags soil saturation & poor drainage)"),
+        ("Pest Infestation Sub-Model:", "97.94% Accuracy (predicts stem borer & tea mosquito bug)"),
+        ("Fungal Disease Sub-Model:", "98.94% Accuracy (calibrated to blast & bud rot triggers)"),
+        ("Dataset Note & Next Steps:", "Trained on synthetic Goa agro-climatic data; real-world field validation with ICAR/ZAO is our proposed next step.")
     ], border_color=C_EMERALD, header_color=C_EMERALD)
 
     s7.notes_slide.notes_text_frame.text = (
         "SPEAKER 3 CUE:\n"
         "Judges, why did we choose AI over basic IF-THEN logic? "
-        "Because agriculture is inherently multi-dimensional and non-linear. "
-        "80mm of rain on sloped terrain in Sattari after 10 dry days is beneficial; but 50mm of rain in a Salcete low-lying field "
-        "after 5 wet days causes immediate fungal blast and root rot. "
-        "Our primary Random Forest model achieves 91.86% overall accuracy, and our 6 hazard sub-models achieve 97 to 99.8% precision."
+        "Because agriculture is multi-dimensional and non-linear. "
+        "Our Random Forest achieved 91.86% accuracy on our evaluation dataset, with specialized sub-models achieving 97 to 99% accuracy across specific stress hazards. "
+        "It's important to note: our current dataset is synthetic and Goa-specific, so real-world field validation with local agricultural bodies is the natural next step."
     )
 
     # =========================================================================
@@ -369,18 +369,18 @@ def create_deck():
         ("6-Axis Spider / Radar Chart:", "Polar decomposition mapping risk probabilities across Drought, Waterlogging, Pest, Disease, Heat, and Soil Acidity in real time.")
     ], header_color=C_EMERALD)
 
-    add_card(s8, 6.8, 1.8, 5.7, 5.0, "🔍 Explainable AI (XAI) & ICAR Prescriptions", [
-        ("No Black Box Guarantee:", "Decomposes Gini feature importances to show exactly which telemetry signals drove the model's decision (e.g. 'Consecutive Wet Days is the top signal with 0.38 relative feature weight')."),
-        ("ICAR-CCARI Prescriptive Rules:", "Automatically pairs the prediction with approved scientific remedies (e.g. AWD water-saving irrigation, Bordeaux paste, pheromone traps)."),
+    add_card(s8, 6.8, 1.8, 5.7, 5.0, "🔍 Explainable AI (XAI) & ICAR-Based Advisories", [
+        ("Explainable AI (XAI) Layer:", "The XAI layer shows which features were most influential in the model's prediction (e.g. consecutive wet days and soil moisture having the highest relative feature-importance scores)."),
+        ("ICAR-CCARI Based Guidance:", "Pairs risk predictions with recommended agronomic practices derived from ICAR-CCARI guidelines (e.g. AWD water-saving irrigation, Bordeaux paste, pheromone traps)."),
         ("One-Click WhatsApp Dispatch:", "Generates formatted advisory messages ready to share directly into village farmer WhatsApp groups.")
     ], header_color=C_AMBER)
 
     s8.notes_slide.notes_text_frame.text = (
         "SPEAKER 3 CUE:\n"
-        "On Tab 2, our What-If Sandbox allows officers to simulate extreme weather disruptions. "
+        "On Tab 2, our What-If Sandbox allows officers to simulate extreme weather scenarios. "
         "Notice our Explainable AI feature: we do not present a black box. "
-        "The model proves why it flagged an alert—showing feature importance weights, such as consecutive wet days emerging as the dominant predictive factor with a 0.38 relative importance score. "
-        "And right below, it translates the alert into official ICAR-CCARI treatment protocols in both English and Konkani."
+        "The XAI layer shows which features were most influential in the model's prediction—for example, showing that consecutive wet days and soil moisture carry the highest feature importance weights. "
+        "And right below, it translates the alert into ICAR-CCARI based treatment protocols in both English and Konkani."
     )
 
     # =========================================================================
@@ -389,26 +389,25 @@ def create_deck():
     s9 = prs.slides.add_slide(blank_layout)
     add_bg(s9)
     add_header(s9, "Speaker 3", "Tab 3: Multi-Modal Leaf Disease Vision Scanner",
-               "Fusing computer vision lesion detection with live Goan microclimate telemetry", "Innovation & Use of AI (20 Marks)")
+               "Combining visual leaf analysis with live Goan microclimate telemetry", "Innovation & Use of AI (20 Marks)")
 
-    add_card(s9, 0.8, 1.8, 5.6, 5.0, "📸 Visual Computer Vision Diagnostics", [
-        ("Specimen Ingestion:", "Supports live photo uploads from mobile phones or one-click verified Goan field sample presets."),
-        ("Colorimetry & Lesion Segmentation:", "Analyzes green/yellow/brown necrotic tissue ratios and irregular lesion borders using NumPy & PIL."),
-        ("Trained Goan Pathologies:", "Rice Blast (भाताचेर करपा), Cashew Shoot Blight (काजू सुकती), Coconut Bud Rot (पोंगो कुजणी), and Healthy Baseline Foliage.")
+    add_card(s9, 0.8, 1.8, 5.6, 5.0, "📸 Computer-Vision Leaf Analysis", [
+        ("Specimen Ingestion:", "Supports live photo uploads from mobile phones or one-click Goan field sample presets."),
+        ("Colorimetry & Lesion Analysis:", "Computer-vision-based leaf analysis using NumPy and PIL to analyze color distribution and necrotic tissue areas."),
+        ("Target Goan Pathologies:", "Configured heuristics for Rice Blast (भाताचेर करपा), Cashew Shoot Blight (काजू सुकती), Coconut Bud Rot (पोंगो कुजणी), and Healthy Foliage.")
     ], header_color=C_CYAN)
 
-    add_card(s9, 6.8, 1.8, 5.7, 5.0, "🔬 The Innovation: Multi-Modal Telemetry Fusion", [
-        ("The Pure-Vision Weakness:", "Standard leaf vision apps produce high false-positive rates (confusing sun scorch or mud stains with fungal blight)."),
+    add_card(s9, 6.8, 1.8, 5.7, 5.0, "🔬 Environmental Context Fusion", [
+        ("Overcoming Pure-Vision Limitations:", "Standard visual inspection alone can mistake mud splatters or sun scorching for active fungal infection."),
         ("Telemetry Fusion Heuristic:", "Our scanner checks whether current taluka weather supports active sporulation (e.g. Humidity >85% + Temp 24-32°C)."),
-        ("Fused Confidence Score:", "Weather telemetry amplifies diagnosis confidence to 94%+, providing definitive fungicide prescriptions (Tricyclazole / Bordeaux paste).")
+        ("Composite Risk Assessment:", "The system combines visual indicators with environmental conditions to produce a more reliable composite risk assessment and advisory.")
     ], header_color=C_EMERALD)
 
     s9.notes_slide.notes_text_frame.text = (
         "SPEAKER 3 CUE:\n"
-        "On Tab 3, we introduce our Multi-Modal Vision Scanner. "
-        "Standard computer vision apps fail in real fields because they confuse mud stains with fungal blast. "
-        "Our innovation is Telemetry Fusion: the computer vision model checks whether the live taluka weather supports sporulation. "
-        "If ambient humidity exceeds 85%, the risk is amplified, confirming an active outbreak and prescribing exact remedies. "
+        "On Tab 3, we introduce our Leaf Vision Scanner. "
+        "Rather than relying solely on image pixels—which can easily confuse mud stains with fungal blast—our system combines visual indicators with live taluka weather conditions. "
+        "If ambient humidity exceeds 85% and temperatures favor sporulation, the composite risk assessment is elevated, triggering targeted agronomic advisories. "
         "Now Speaker 4 will cover scalability and ethics."
     )
 
@@ -429,7 +428,7 @@ def create_deck():
 
     add_card(s10, 6.8, 1.8, 5.7, 5.0, "📑 Anti-Spam Governance & CSV Audit Trails", [
         ("15-Minute Anti-Spam Rate Limiter:", "Prevents bombarding farmers with duplicate alerts if meteorological sensors fluctuate."),
-        ("Immutable CSV Audit Logging:", "Every dispatched alert is permanently logged to data/alert_history.csv with timestamps, taluka, crop, and risk levels."),
+        ("Timestamped CSV Audit Logging:", "Every dispatched alert is permanently logged to data/alert_history.csv with timestamps, taluka, crop, and risk levels."),
         ("Government Export:", "Officers can download complete audit records as CSV for departmental review and subsidy verification.")
     ], header_color=C_CYAN)
 
@@ -438,7 +437,7 @@ def create_deck():
         "Judges, an AI system that only works on high-end smartphones fails the public-service test. "
         "Many elderly farmers in rural Canacona or Sattari rely on basic 2G feature phones. "
         "Tab 6 formats concise SMS alerts in native Konkani under 160 characters. "
-        "We enforce a 15-minute anti-spam rate limiter and log every broadcast into an immutable CSV audit trail."
+        "We enforce a 15-minute anti-spam rate limiter and log every broadcast into a timestamped CSV audit trail."
     )
 
     # =========================================================================
@@ -447,24 +446,23 @@ def create_deck():
     s11 = prs.slides.add_slide(blank_layout)
     add_bg(s11)
     add_header(s11, "Speaker 4", "Tab 7: Responsible AI & Ethical Governance",
-               "100% compliance with India's DPDP Act 2023 & the Sankalp Setu Code of Conduct", "Responsible AI (10 Marks)")
+               "Designed for Privacy by Design, Ethical AI, and Algorithmic Fairness", "Responsible AI (10 Marks)")
 
     add_card(s11, 0.8, 1.8, 5.6, 5.0, "🛡️ Privacy, Security & Compliance", [
-        ("Zero Citizen PII Collected:", "Zero farmer names, Aadhaar numbers, phonebooks, or land deeds are stored on cloud servers. Complies with DPDP Act 2023."),
-        ("Public & Synthetic Data Only:", "Strictly adheres to hackathon guidelines by utilizing public OpenWeatherMap APIs, IMD bulletins, and synthetic agro-climatic datasets."),
-        ("Human-in-the-Loop Guardrails:", "AgriWatch is designed as a decision-support advisory tool for ZAO officers and farmers, never an autonomous pesticide buyer.")
+        ("Privacy by Design (DPDP Alignment):", "The prototype is designed to minimize personal-data collection and currently operates without storing farmer PII or identity records."),
+        ("Public & Synthetic Data Focus:", "Adheres to hackathon principles by utilizing public weather APIs, IMD patterns, and calibrated synthetic datasets."),
+        ("Human-in-the-Loop Guardrails:", "AgriWatch is designed as an advisory decision-support tool for agricultural officers and farmers, not autonomous action.")
     ], header_color=C_EMERALD)
 
     add_card(s11, 6.8, 1.8, 5.7, 5.0, "⚖️ Algorithmic Fairness & Disclosure", [
         ("Taluka-Level Fairness Audit:", "Model recall audited across coastal talukas (Salcete: 92.1%) vs. inland talukas (Sattari: 91.8%) to eliminate regional algorithmic bias."),
         ("Official AI Tool Disclosure:", "Complete disclosure table detailing where scikit-learn, Streamlit, and assistive AI coding tools were utilized."),
-        ("Transparency & Explainability:", "Every stress alert is accompanied by Gini feature importance attribution, ensuring zero unexplainable decisions.")
+        ("Transparency & Explainability:", "Every stress alert is accompanied by feature importance attribution, ensuring zero unexplainable decisions.")
     ], header_color=C_CYAN)
 
     s11.notes_slide.notes_text_frame.text = (
         "SPEAKER 4 CUE:\n"
-        "For Responsible AI, we hit every single guideline in the hackathon framework. "
-        "First, we collect zero citizen PII, complying 100% with India's Digital Personal Data Protection Act 2023. "
+        "For Responsible AI, our prototype is designed to minimize personal-data collection and operates without storing farmer PII, aligning with the principles of the DPDP Act 2023. "
         "Second, we conducted a taluka-level fairness audit ensuring inland talukas like Sattari receive the same 91%+ model accuracy as coastal Salcete. "
         "Third, we include a complete AI Tool Disclosure table directly in Tab 7."
     )
@@ -475,27 +473,26 @@ def create_deck():
     s12 = prs.slides.add_slide(blank_layout)
     add_bg(s12)
     add_header(s12, "Speaker 4", "Tab 8: Goa Govt Scalability Roadmap & Economic ROI",
-               "Deployable across 190+ Village Panchayats for under ₹1.5 Lakhs", "Scalability & Presentation (20 Marks)")
+               "Proposed deployment roadmap across Goa's agricultural support infrastructure", "Scalability & Presentation (20 Marks)")
 
-    add_card(s12, 0.8, 1.8, 5.6, 5.0, "🏛️ Concrete 3-Phase Deployment Roadmap", [
+    add_card(s12, 0.8, 1.8, 5.6, 5.0, "🏛️ Proposed Deployment Roadmap", [
         ("Phase 1: ZAO & KVK Pilot (Months 1-3):", "Pilot deployment at Zonal Agriculture Offices and Krishi Vigyan Kendras (Old Goa & Margao)."),
         ("Phase 2: Panchayat e-Gram Kiosks (Months 4-6):", "Integrate into 190+ Village Panchayat kiosks for walk-in Kisan Health Card printing."),
         ("Phase 3: Kisan Call Centre 1800-180-1551 (Months 7-12):", "Automate IVRS voice advisory calls in spoken Konkani for illiterate farmers.")
     ], header_color=C_CYAN)
 
-    add_card(s12, 6.8, 1.8, 5.7, 5.0, "💰 Massive Economic Return on Investment", [
-        ("Minimal Compute Overhead (<₹1.5L):", "Runs on low-cost open-source cloud infrastructure; zero expensive proprietary GPU dependencies."),
-        ("Economic Value Delivered:", "Protects Goa's agrarian economy against an estimated ₹50 to 80 Crores annually in preventable crop damage."),
-        ("Our Closing Commitment:", "AgriWatch Goa bridges advanced artificial intelligence with the humble hands that feed our State. We are ready to deploy!")
+    add_card(s12, 6.8, 1.8, 5.7, 5.0, "💰 Targeted Economic Protection", [
+        ("Low-Cost Infrastructure Target:", "Estimated prototype-scale deployment cost: under ₹1.5 lakh, subject to government infrastructure and integration requirements."),
+        ("Targeted Economic Protection:", "Aims to help curb preventable crop losses through early, timely agro-meteorological advisories."),
+        ("Our Closing Commitment:", "AgriWatch Goa bridges advanced technology with the smallholder farmers who feed our State. We welcome your questions!")
     ], border_color=C_EMERALD, header_color=C_EMERALD)
 
     s12.notes_slide.notes_text_frame.text = (
         "SPEAKER 4 CUE (CLOSING PUNCHLINE):\n"
-        "Finally, scalability and cost. AgriWatch Goa integrates seamlessly into Goa's 190+ Village Panchayat e-Gram kiosks, "
+        "Finally, our proposed deployment roadmap. AgriWatch Goa is designed to integrate into existing agricultural touchpoints, including Village Panchayat kiosks, "
         "KVKs, and the toll-free Kisan Call Centre (1800-180-1551). "
-        "With a deployment cost under ₹1.5 lakhs using open-source infrastructure, this system can help protect "
-        "an estimated ₹50 to 80 Crores annually in preventable crop losses. "
-        "Sankalp Setu means a bridge of dedication—AgriWatch Goa is that bridge between AI and the farmers who feed our state. "
+        "With an estimated prototype-scale infrastructure cost under ₹1.5 lakhs, this platform aims to deliver timely intelligence to protect rural livelihoods. "
+        "Sankalp Setu means a bridge of dedication—AgriWatch Goa is that bridge between technology and our farmers. "
         "Thank you, and we welcome your questions!"
     )
 
