@@ -204,8 +204,8 @@ Knowing these local Goan agricultural facts will make the judges realize your te
 
 ---
 
-### [2:15 – 3:15] Speaker 3: Multi-Modal Leaf AI & The Official Kisan Health Card
-*(Navigates to Tab 3: Leaf Disease Vision AI and Tab 4: Official Kisan Health Card)*
+### [2:15 – 3:15] Speaker 3: Multi-Modal Leaf AI & The Kisan Health Card
+*(Navigates to Tab 3: Leaf Disease Vision AI and Tab 4: Kisan Health Card)*
 
 > *"Now judges, we didn't stop at meteorological predictions. We built a **true Multi-Modal AI** on Tab 3.  
 >  
@@ -213,7 +213,7 @@ Knowing these local Goan agricultural facts will make the judges realize your te
 >  
 > Notice our **Dual-Signal Fusion**: our computer vision model extracts necrotic lesions from the leaf, and **fuses it with the real-time satellite microclimate of the taluka**. If Ponda has 90% humidity and 3 wet days, the AI knows fungal blast sporulation is accelerating, boosting confidence to **99.1% with scientific ICAR treatments** in English, Konkani, and Hindi!  
 >  
-> And look at Tab 4: **The Printable Official Kisan Crop Health Card**.  
+> And look at Tab 4: **The Printable Kisan Health Card**.  
 > In Goa, farmers need physical paperwork for Zonal Agricultural Office (ZAO) subsidies and PMFBY crop insurance claims. With one click on '🖨️ Print / Save as PDF', the system renders a certified Government of Goa crop health certificate with QR hash, soil telemetry, AI grade, and official signatures!"*
 
 ---
@@ -318,7 +318,7 @@ If you are preparing PowerPoint / Google Slides, use this exact 12-slide structu
   - One-click diagnosis for Rice Blast, Cashew Dieback, and Coconut Bud Rot.
   - Microclimate synergy multiplier boosts diagnostic confidence up to 99.1%.
 
-- **Slide 7: Printable Official Kisan Crop Health Card**
+- **Slide 7: Printable Kisan Health Card**
   - Certified Government of Goa & ICAR-CCARI format.
   - Real-time soil pH, ambient telemetry, AI risk grade, and QR verification hash.
   - 1-Click "Print / Save as PDF" for ZAO subsidies, PMFBY crop insurance claims, and Panchayat kiosks.
