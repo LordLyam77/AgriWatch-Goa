@@ -95,7 +95,7 @@ The hackathon evaluation rubric awards **100 points** across 6 key pillars. Here
 ### 3. `crop_model.py` (AI Predictor & Advisory Engine)
 - **Architecture:** Multi-target Random Forest classifier (`n_estimators=160`, `max_depth=14`, `class_weight='balanced'`).
 - **Feature Matrix:** 11 scaled numerical features + 24 one-hot encoded categorical columns (Taluka, Crop, Growth Stage).
-- **Explainable AI (XAI):** Decomposes tree feature importances so the model explains *why* it flagged an alert (e.g., "75% of stress probability driven by consecutive wet days and high soil moisture").
+- **Explainable AI (XAI):** Decomposes tree feature importances so the model explains which telemetry signals drove its classification (e.g., "Consecutive wet days and saturated soil moisture represent the primary predictive decision weights").
 - **ICAR-CCARI Prescriptions:** Maps predicted hazards to verified protocols from the Central Coastal Agricultural Research Institute (Old Goa).
 - **Bilingual Translation Engine:** Automatically renders advisories in Devanagari Konkani and Marathi.
 

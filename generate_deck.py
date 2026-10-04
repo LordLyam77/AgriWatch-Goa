@@ -370,7 +370,7 @@ def create_deck():
     ], header_color=C_EMERALD)
 
     add_card(s8, 6.8, 1.8, 5.7, 5.0, "🔍 Explainable AI (XAI) & ICAR Prescriptions", [
-        ("No Black Box Guarantee:", "Decomposes Gini feature importances to show farmers exactly why an alert was triggered (e.g. '72% of stress driven by consecutive wet days')."),
+        ("No Black Box Guarantee:", "Decomposes Gini feature importances to show exactly which telemetry signals drove the model's decision (e.g. 'Consecutive Wet Days is the top signal with 0.38 relative feature weight')."),
         ("ICAR-CCARI Prescriptive Rules:", "Automatically pairs the prediction with approved scientific remedies (e.g. AWD water-saving irrigation, Bordeaux paste, pheromone traps)."),
         ("One-Click WhatsApp Dispatch:", "Generates formatted advisory messages ready to share directly into village farmer WhatsApp groups.")
     ], header_color=C_AMBER)
@@ -379,7 +379,7 @@ def create_deck():
         "SPEAKER 3 CUE:\n"
         "On Tab 2, our What-If Sandbox allows officers to simulate extreme weather disruptions. "
         "Notice our Explainable AI feature: we do not present a black box. "
-        "The model proves why it flagged an alert—showing, for example, that 72% of the risk is driven by consecutive wet days. "
+        "The model proves why it flagged an alert—showing feature importance weights, such as consecutive wet days emerging as the dominant predictive factor with a 0.38 relative importance score. "
         "And right below, it translates the alert into official ICAR-CCARI treatment protocols in both English and Konkani."
     )
 
@@ -500,8 +500,13 @@ def create_deck():
     )
 
     out_file = "AgriWatch_Goa_Presentation.pptx"
-    prs.save(out_file)
-    print(f"Presentation saved successfully to: {out_file}")
+    try:
+        prs.save(out_file)
+        print(f"Presentation saved successfully to: {out_file}")
+    except PermissionError:
+        fallback = "AgriWatch_Goa_Presentation_Updated.pptx"
+        prs.save(fallback)
+        print(f"Original file is locked by PowerPoint. Saved updated deck to: {fallback}")
 
 if __name__ == "__main__":
     create_deck()
