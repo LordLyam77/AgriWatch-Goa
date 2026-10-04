@@ -9,6 +9,7 @@ high-impact, professionally themed agricultural deck with:
 
 import os
 import sys
+import time
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
@@ -728,24 +729,95 @@ def build_deck():
         ("🏛️ Government System Integration:", "Connect with PMFBY crop insurance portals and Goa Krishi Card database for automatic subsidy verification.")
     ])
 
-    # Bottom Row: Key Closing Mission Statement + Thank You Box
-    add_banner(s12, 0.8, 5.80, 8.5, 1.25, "🌾",
+    # Bottom Row: Key Closing Mission Statement
+    add_banner(s12, 0.8, 5.80, 11.7, 1.15, "🌾",
                "“AgriWatch Goa bridges AI and agriculture by turning environmental data into early warnings that help farmers act before crop stress becomes crop loss.”")
 
-    add_card(s12, 9.55, 5.80, 2.95, 1.25, "🙏 Thank You!", [
-        ("AgriWatch Goa:", "Sankalp Setu 2026"),
-        ("Live Demo:", "Q&A & Discussion")
-    ], bg_color=RGBColor(16, 52, 34), border_color=C_GOLD_HARVEST, title_color=C_GOLD_HARVEST, dark_mode=True)
+    # =========================================================================
+    # SLIDE 13: Thank You / Concluding Hero Slide
+    # =========================================================================
+    s13 = prs.slides.add_slide(blank_layout)
+    set_slide_bg(s13, C_HERO_BG)
 
-    # Save
-    out_file = "AI-Powered-Crop-Stress-Detection-and-Farm-Early-Warning-Platform.pptx"
-    try:
-        prs.save(out_file)
-        print(f"✅ Successfully refactored and saved to: {out_file}")
-    except PermissionError:
-        fallback = "AI-Powered-Crop-Stress-Detection-and-Farm-Early-Warning-Platform_Rethemed.pptx"
+    # Right Hero Image (Bookending the presentation with Slide 1 image)
+    if os.path.exists(img1_path):
+        s13.shapes.add_picture(img1_path, Inches(8.13), Inches(0), Inches(5.2), Inches(7.5))
+
+    # Left Container Text
+    tb13 = s13.shapes.add_textbox(Inches(0.8), Inches(0.8), Inches(7.0), Inches(4.1))
+    tf13 = tb13.text_frame
+    tf13.word_wrap = True
+    tf13.margin_left = tf13.margin_top = tf13.margin_right = tf13.margin_bottom = 0
+
+    p_eyebrow13 = tf13.paragraphs[0]
+    p_eyebrow13.text = "🌿 SANKALP SETU HACKATHON 2026 • TRACK #4"
+    p_eyebrow13.font.name = "Montserrat"
+    p_eyebrow13.font.size = Pt(12)
+    p_eyebrow13.font.bold = True
+    p_eyebrow13.font.color.rgb = C_GOLD_HARVEST
+    p_eyebrow13.space_after = Pt(10)
+
+    p_ty13 = tf13.add_paragraph()
+    p_ty13.text = "Thank You!"
+    p_ty13.font.name = "Montserrat"
+    p_ty13.font.size = Pt(44)
+    p_ty13.font.bold = True
+    p_ty13.font.color.rgb = C_WHITE
+    p_ty13.space_after = Pt(6)
+
+    p_konkani13 = tf13.add_paragraph()
+    p_konkani13.text = "देव बरे करूं • Dev Bare Karum"
+    p_konkani13.font.name = "Montserrat"
+    p_konkani13.font.size = Pt(18)
+    p_konkani13.font.bold = True
+    p_konkani13.font.color.rgb = C_EMERALD
+    p_konkani13.space_after = Pt(12)
+
+    p_sub13 = tf13.add_paragraph()
+    p_sub13.text = "AgriWatch Goa — AI-Powered Crop Stress Detection & Farm Early-Warning Platform."
+    p_sub13.font.name = "Source Sans 3"
+    p_sub13.font.size = Pt(14)
+    p_sub13.font.bold = True
+    p_sub13.font.color.rgb = RGBColor(226, 232, 240)
+    p_sub13.space_after = Pt(6)
+
+    p_sub2_13 = tf13.add_paragraph()
+    p_sub2_13.text = "Predictive agro-meteorological intelligence protecting Goa's smallholder farmers before crop stress becomes crop loss."
+    p_sub2_13.font.name = "Source Sans 3"
+    p_sub2_13.font.size = Pt(13)
+    p_sub2_13.font.color.rgb = RGBColor(186, 204, 192)
+
+    # 2 Action Cards below
+    add_card(s13, 0.8, 5.2, 3.4, 1.45, "💬 Q&A & Demonstration", [
+        ("Prototype:", "Live Streamlit System Ready"),
+        ("Discussion:", "Open for Judges & Mentors")
+    ], bg_color=RGBColor(16, 52, 34), border_color=C_EMERALD, title_color=C_GOLD_HARVEST, dark_mode=True)
+
+    add_card(s13, 4.4, 5.2, 3.4, 1.45, "👥 4-Member Team", [
+        ("Institution:", "Rosary College, Navelim"),
+        ("Mission:", "Low-Tech Smallholder Inclusion")
+    ], bg_color=RGBColor(16, 52, 34), border_color=C_EMERALD, title_color=C_GOLD_HARVEST, dark_mode=True)
+
+    # Save with resilient fallbacks if locked by PowerPoint or WPS Office
+    candidate_files = [
+        "AI-Powered-Crop-Stress-Detection-and-Farm-Early-Warning-Platform.pptx",
+        "AI-Powered-Crop-Stress-Detection-and-Farm-Early-Warning-Platform_Rethemed.pptx",
+        "AI-Powered-Crop-Stress-Detection-and-Farm-Early-Warning-Platform_v13.pptx"
+    ]
+    saved_path = None
+    for cand in candidate_files:
+        try:
+            prs.save(cand)
+            saved_path = cand
+            print(f"✅ Successfully built and saved to: {cand}")
+            break
+        except PermissionError:
+            continue
+    
+    if not saved_path:
+        fallback = f"AI-Powered-Crop-Stress-Detection-and-Farm-Early-Warning-Platform_Slide13_{int(time.time())}.pptx"
         prs.save(fallback)
-        print(f"⚠️ Primary file locked by PowerPoint. Saved to: {fallback}")
+        print(f"⚠️ Primary candidates locked. Saved to: {fallback}")
 
 if __name__ == "__main__":
     build_deck()
