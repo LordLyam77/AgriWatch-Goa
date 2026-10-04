@@ -15,3 +15,6 @@ env/
 .DS_Store
 Thumbs.db
 ~$*
+
+# Temporary scratch and extraction artifacts
+scratch/
