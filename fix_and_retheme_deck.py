@@ -149,6 +149,45 @@ def add_banner(slide, left, top, width, height, icon, text, accent_color=C_GOLD_
     r_text.font.size = Pt(12.5)
     r_text.font.color.rgb = C_TEXT_DARK
 
+def add_diagram_node(slide, x, y, w, h, title, subtitle="",
+                     title_color=C_WHITE, sub_color=RGBColor(240, 248, 242),
+                     title_size=10.0, sub_size=8.0, bold=True,
+                     add_badge=False, badge_bg=C_CARD_BG, badge_border=C_CARD_BORDER):
+    """Add a clean, centered text overlay on a diagram node."""
+    if add_badge:
+        badge = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h))
+        badge.fill.solid()
+        badge.fill.fore_color.rgb = badge_bg
+        badge.line.color.rgb = badge_border
+        badge.line.width = Pt(1.1)
+
+    tb = slide.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))
+    tf = tb.text_frame
+    tf.word_wrap = True
+    tf.margin_left = Inches(0.03)
+    tf.margin_right = Inches(0.03)
+    tf.margin_top = Inches(0.03)
+    tf.margin_bottom = Inches(0.03)
+
+    p0 = tf.paragraphs[0]
+    p0.alignment = PP_ALIGN.CENTER
+    r0 = p0.add_run()
+    r0.text = title
+    r0.font.name = "Montserrat"
+    r0.font.size = Pt(title_size)
+    r0.font.bold = bold
+    r0.font.color.rgb = title_color
+
+    if subtitle:
+        p1 = tf.add_paragraph()
+        p1.alignment = PP_ALIGN.CENTER
+        p1.space_before = Pt(2)
+        r1 = p1.add_run()
+        r1.text = subtitle
+        r1.font.name = "Source Sans 3"
+        r1.font.size = Pt(sub_size)
+        r1.font.color.rgb = sub_color
+
 
 def build_deck():
     prs = Presentation()
@@ -255,33 +294,86 @@ def build_deck():
     add_header(s3, "From Reactive Agriculture to Predictive Intelligence",
                "Fusing meteorological telemetry, soil parameters, and AI inference into farmer advisories")
 
-    # Left: Diagram Image resized with proper aspect ratio (starts at 1.5, height 4.2)
+    # Left: Diagram Image resized with proper aspect ratio (1.26:1)
+    img3_left = 0.70
+    img3_top  = 1.45
+    img3_w    = 5.80
+    img3_h    = 4.60
     img3_path = os.path.join(IMG_DIR, "slide3_pic3.png")
     if os.path.exists(img3_path):
-        s3.shapes.add_picture(img3_path, Inches(0.8), Inches(1.5), Inches(5.6), Inches(4.35))
+        s3.shapes.add_picture(img3_path, Inches(img3_left), Inches(img3_top), Inches(img3_w), Inches(img3_h))
+        
+        # 7 Diagram Text Overlays (Exact Node Mapping)
+        # Center Hub (Dark Slate, White Bold text)
+        add_diagram_node(s3, img3_left + 0.409 * img3_w, img3_top + 0.426 * img3_h,
+                         0.180 * img3_w, 0.141 * img3_h,
+                         "Predictive\nAdvisory Flow", "",
+                         title_color=C_WHITE, title_size=10.0, bold=True)
+        
+        # Weather Data (Top Right)
+        add_diagram_node(s3, img3_left + 0.586 * img3_w, img3_top + 0.108 * img3_h,
+                         0.267 * img3_w, 0.125 * img3_h,
+                         "Weather Data", "Real-time forecasts & trends",
+                         title_color=C_WHITE, sub_color=RGBColor(240, 248, 242),
+                         title_size=9.5, sub_size=8.0)
+        
+        # Farmer Advisory (Top Left)
+        add_diagram_node(s3, img3_left + 0.140 * img3_w, img3_top + 0.108 * img3_h,
+                         0.267 * img3_w, 0.125 * img3_h,
+                         "Farmer Advisory", "Actionable recommendations",
+                         title_color=C_WHITE, sub_color=RGBColor(240, 248, 242),
+                         title_size=9.5, sub_size=8.0)
+        
+        # Early Warning (Middle Left)
+        add_diagram_node(s3, img3_left + 0.042 * img3_w, img3_top + 0.435 * img3_h,
+                         0.273 * img3_w, 0.125 * img3_h,
+                         "Early Warning", "Timely alerts on threats",
+                         title_color=C_WHITE, sub_color=RGBColor(240, 248, 242),
+                         title_size=9.5, sub_size=8.0)
+        
+        # Soil & Agro-Climatic Data (Middle Right)
+        add_diagram_node(s3, img3_left + 0.682 * img3_w, img3_top + 0.408 * img3_h,
+                         0.273 * img3_w, 0.125 * img3_h,
+                         "Soil & Agro-Climatic", "Soil moisture & microclimate",
+                         title_color=C_WHITE, sub_color=RGBColor(240, 248, 242),
+                         title_size=9.0, sub_size=7.5)
+        
+        # Leaf Analysis (Bottom Left)
+        add_diagram_node(s3, img3_left + 0.140 * img3_w, img3_top + 0.765 * img3_h,
+                         0.267 * img3_w, 0.125 * img3_h,
+                         "Leaf Analysis", "Visual foliar diagnostics",
+                         title_color=C_WHITE, sub_color=RGBColor(240, 248, 242),
+                         title_size=9.5, sub_size=8.0)
+        
+        # Machine Learning (Bottom Right)
+        add_diagram_node(s3, img3_left + 0.586 * img3_w, img3_top + 0.742 * img3_h,
+                         0.267 * img3_w, 0.125 * img3_h,
+                         "Machine Learning", "Pattern detection & risk",
+                         title_color=C_WHITE, sub_color=RGBColor(240, 248, 242),
+                         title_size=9.5, sub_size=8.0)
 
     # Right: 6 System Capabilities Cards
-    add_card(s3, 6.7, 1.5, 2.85, 1.35, "📍 12 Goa Talukas", [
+    add_card(s3, 6.8, 1.45, 2.85, 1.4, "📍 12 Goa Talukas", [
         ("Coverage:", "Hyper-localized GIS mapping from Tiswadi to Canacona.")
     ])
-    add_card(s3, 9.75, 1.5, 2.85, 1.35, "🌾 Multi-Stress AI", [
+    add_card(s3, 9.8, 1.45, 2.85, 1.4, "🌾 Multi-Stress AI", [
         ("Predictions:", "Evaluates Drought, Waterlog, Pest, Disease & Heat.")
     ])
-    add_card(s3, 6.7, 3.0, 2.85, 1.35, "🔬 Visual Leaf AI", [
+    add_card(s3, 6.8, 3.0, 2.85, 1.4, "🔬 Visual Leaf AI", [
         ("Diagnostics:", "Extracts colorimetry & necrotic lesion biomarkers.")
     ])
-    add_card(s3, 9.75, 3.0, 2.85, 1.35, "🔍 Explainable AI", [
+    add_card(s3, 9.8, 3.0, 2.85, 1.4, "🔍 Explainable AI", [
         ("Transparency:", "Decomposes Gini feature drivers for every alert.")
     ])
-    add_card(s3, 6.7, 4.5, 2.85, 1.35, "🌐 Trilingual Engine", [
+    add_card(s3, 6.8, 4.55, 2.85, 1.4, "🌐 Trilingual Engine", [
         ("Vernacular:", "Native Konkani (देवनागरी), Hindi, and English.")
     ])
-    add_card(s3, 9.75, 4.5, 2.85, 1.35, "📱 2G SMS Inclusion", [
+    add_card(s3, 9.8, 4.55, 2.85, 1.4, "📱 2G SMS Inclusion", [
         ("Delivery:", "Accessible on basic feature phones and WhatsApp.")
     ])
 
-    # Bottom Flow Banner (safe at Y=6.1, height 0.8)
-    add_banner(s3, 0.8, 6.1, 11.8, 0.8, "🌾",
+    # Bottom Flow Banner (safe at Y=6.15, height 0.85)
+    add_banner(s3, 0.7, 6.15, 11.95, 0.85, "🌾",
                "Integrated Pipeline: Telemetry Ingestion ➔ Machine Learning Inference ➔ XAI Verification ➔ Actionable Farmer Advisory")
 
     # =========================================================================
@@ -297,7 +389,7 @@ def build_deck():
     if os.path.exists(img4_path):
         s4.shapes.add_picture(img4_path, Inches(1.15), Inches(1.5), Inches(11.0), Inches(3.3))
 
-    # Bottom: 3 Technology Column Cards (safe at Y=5.1, height 1.8)
+    # Bottom: 3 Technology Column Cards (safe at Y=5.0, height 1.9)
     add_card(s4, 0.8, 5.0, 3.75, 1.9, "🧠 Core AI & Analytics", [
         ("Python 3.14 & Scikit-learn:", "Ensemble algorithms & data pipes."),
         ("Random Forest Models:", "Primary stress classifier + 6 sub-models."),
@@ -389,19 +481,62 @@ def build_deck():
     add_header(s7, "The AI Engine: Multi-Target Random Forest Architecture",
                "Evaluating multi-dimensional environmental signals across Goan agriculture")
 
-    # Center: Diagram Image (width 9.5, height 3.2, pos 1.9, 1.5)
+    # Left: Diagram Image resized with exact native aspect ratio (1.48:1)
+    img7_left = 0.80
+    img7_top  = 1.55
+    img7_w    = 6.00
+    img7_h    = 4.06
     img7_path = os.path.join(IMG_DIR, "slide7_pic2.png")
     if os.path.exists(img7_path):
-        s7.shapes.add_picture(img7_path, Inches(1.9), Inches(1.5), Inches(9.5), Inches(3.2))
+        s7.shapes.add_picture(img7_path, Inches(img7_left), Inches(img7_top), Inches(img7_w), Inches(img7_h))
+        
+        # 5 Diagram Text Overlays (Exact Node Mapping)
+        # Center Hub (Dark Slate, White Bold text)
+        add_diagram_node(s7, img7_left + 0.406 * img7_w, img7_top + 0.400 * img7_h,
+                         0.183 * img7_w, 0.168 * img7_h,
+                         "Random Forest\nModel", "",
+                         title_color=C_WHITE, title_size=10.5, bold=True)
+        
+        # Hazard Predictions (Top Left)
+        add_diagram_node(s7, img7_left + 0.043 * img7_w, img7_top + 0.101 * img7_h,
+                         0.271 * img7_w, 0.149 * img7_h,
+                         "Hazard Predictions", "7 risks + composite stress",
+                         title_color=C_WHITE, sub_color=RGBColor(240, 248, 242),
+                         title_size=10.0, sub_size=8.5)
+        
+        # Weather Features (Top Right)
+        add_diagram_node(s7, img7_left + 0.680 * img7_w, img7_top + 0.101 * img7_h,
+                         0.271 * img7_w, 0.149 * img7_h,
+                         "Weather Features", "Temperature, rain, humidity",
+                         title_color=C_WHITE, sub_color=RGBColor(240, 248, 242),
+                         title_size=10.0, sub_size=8.5)
+        
+        # Crop Features (Bottom Left)
+        add_diagram_node(s7, img7_left + 0.043 * img7_w, img7_top + 0.723 * img7_h,
+                         0.271 * img7_w, 0.149 * img7_h,
+                         "Crop Features", "Growth stage, variety, health",
+                         title_color=C_WHITE, sub_color=RGBColor(240, 248, 242),
+                         title_size=10.0, sub_size=8.5)
+        
+        # Soil Features (Bottom Right)
+        add_diagram_node(s7, img7_left + 0.679 * img7_w, img7_top + 0.741 * img7_h,
+                         0.271 * img7_w, 0.149 * img7_h,
+                         "Soil Features", "Moisture, pH, texture",
+                         title_color=C_WHITE, sub_color=RGBColor(240, 248, 242),
+                         title_size=10.0, sub_size=8.5)
 
-    # Bottom: 2 balanced boxes (top 4.9, height 2.05)
-    add_card(s7, 0.8, 4.9, 5.7, 2.05, "🧠 Machine Learning Architecture", [
+    # Left Bottom Banner (safe at Y=5.80, height 1.25)
+    add_banner(s7, 0.80, 5.80, 6.00, 1.25, "🧠",
+               "1 Primary Classifier + 6 Binary Hazard Sub-Models evaluate non-linear multi-stress interactions across Goa in under 0.05 seconds.")
+
+    # Right: 2 Stacked Architecture & Metrics Cards
+    add_card(s7, 7.10, 1.55, 5.45, 2.65, "🧠 Machine Learning Architecture", [
         ("Multi-Target Design:", "1 Primary Classifier (Overall Stress) + 6 specialized Binary Hazard Sub-Models (Drought, Waterlog, Pest, Disease, Heat, Soil pH)."),
         ("Non-Linear Synthesis:", "Evaluates complex interactions (e.g. 50mm rain in low-lying Salcete causing blast vs. 80mm in sloped Sattari)."),
         ("Engineered for Speed:", "Configured with n_jobs=1 for ultra-fast, in-process single-record inference under 0.05 seconds.")
     ])
 
-    add_card(s7, 6.8, 4.9, 5.7, 2.05, "📊 Evaluation Benchmark Metrics", [
+    add_card(s7, 7.10, 4.40, 5.45, 2.65, "📊 Evaluation Benchmark Metrics", [
         ("Primary Stress Classifier:", "91.86% Accuracy | 96.38% Precision | 94.14% ROC-AUC"),
         ("Hazard Sub-Models:", "Drought: 97.5% | Waterlog: 99.5% | Pest Bloom: 97.9% | Fungal Disease: 98.9%"),
         ("Evaluation Dataset Note:", "Trained on synthetic Goa agro-climatic data (3,500 samples); real-world field validation with ICAR/ZAO is our proposed next step.")
@@ -442,22 +577,48 @@ def build_deck():
     add_header(s9, "Multi-Modal Leaf Disease Scanner & Telemetry Fusion",
                "Combining computer-vision lesion detection with live Goan microclimatic telemetry")
 
-    # Top Diagram Banner (width 11.7, height 2.6, pos 0.8, 1.5)
+    # Top Diagram Banner (width 11.0, height 4.13, exact native aspect ratio 2.66:1)
+    img9_left = 1.15
+    img9_top  = 1.35
+    img9_w    = 11.00
+    img9_h    = 4.13
     img9_path = os.path.join(IMG_DIR, "slide9_pic2.png")
     if os.path.exists(img9_path):
-        s9.shapes.add_picture(img9_path, Inches(1.3), Inches(1.5), Inches(10.7), Inches(2.6))
+        s9.shapes.add_picture(img9_path, Inches(img9_left), Inches(img9_top), Inches(img9_w), Inches(img9_h))
+        
+        # 5 Pipeline Stage Badges directly underneath each circular step icon
+        stages9 = [
+            ("1", "Leaf Image", "Field sample upload", 0.122),
+            ("2", "Computer Vision", "HSV color analysis", 0.315),
+            ("3", "Color & Lesions", "Necrosis area masking", 0.504),
+            ("4", "Environmental Data", "Microclimate fusion", 0.693),
+            ("5", "Risk Assessment", "Composite AI diagnosis", 0.883),
+        ]
+        for num, title, subtitle, rel_center in stages9:
+            cx = img9_left + rel_center * img9_w
+            box_w = 1.85
+            box_h = 0.85
+            box_left = cx - box_w / 2
+            box_top = img9_top + 0.68 * img9_h  # 1.35 + 2.81 = 4.16
+            
+            add_diagram_node(s9, box_left, box_top, box_w, box_h,
+                             f"{num}. {title}", subtitle,
+                             title_color=C_FOREST_DARK, sub_color=C_TEXT_MUTED,
+                             title_size=10.5, sub_size=8.5,
+                             add_badge=True, badge_bg=RGBColor(254, 255, 253),
+                             badge_border=C_CARD_BORDER)
 
-    # Bottom: 2 balanced boxes (top 4.3, height 2.7)
-    add_card(s9, 0.8, 4.3, 5.7, 2.65, "📸 Computer-Vision Leaf Analysis", [
-        ("Specimen Ingestion:", "Supports live photo uploads from mobile devices or one-click Goan field sample presets."),
-        ("Colorimetry & Lesion Masking:", "Computer vision algorithms analyze color distribution and necrotic tissue areas using NumPy & PIL."),
-        ("Target Goan Pathologies:", "Configured heuristics for Rice Blast (भाताचेर करपा), Cashew Shoot Blight (काजू सुकती), Coconut Bud Rot (पोंगो कुजणी), and Healthy Foliage.")
+    # Bottom: 2 balanced boxes (top 5.50, height 1.60)
+    add_card(s9, 0.8, 5.50, 5.7, 1.60, "📸 Computer-Vision Leaf Analysis", [
+        ("Specimen Ingestion:", "Direct mobile upload with colorimetric RGB-to-HSV conversion."),
+        ("Lesion Segmentation:", "Calculates foliar necrotic ratio & brown-spot clustering using NumPy & PIL."),
+        ("Goan Pathologies:", "Calibrated for Rice Blast (भाताचेर करपा), Cashew Shoot Blight & Coconut Bud Rot.")
     ])
 
-    add_card(s9, 6.8, 4.3, 5.7, 2.65, "🔬 Environmental Context Fusion", [
-        ("Overcoming Pure-Vision Weakness:", "Standard visual inspection alone can mistake mud splatters or harmless sun scorching for active fungal infection."),
-        ("Telemetry Fusion Heuristic:", "Our scanner checks whether current taluka weather supports active sporulation (e.g. Humidity >85% + Temp 24–32°C)."),
-        ("Composite Risk Assessment:", "Combines visual foliar indicators with environmental conditions to produce a reliable composite risk assessment and ICAR-CCARI treatment advice.")
+    add_card(s9, 6.8, 5.50, 5.7, 1.60, "🔬 Environmental Context Fusion", [
+        ("Beyond Pure Vision:", "Visual symptoms alone cannot distinguish harmless mud from fungal infection."),
+        ("Microclimatic Heuristic:", "Cross-checks active spore proliferation (Humidity >85% + Temp 24–32°C)."),
+        ("Composite Action Plan:", "Combines visual indicators with taluka climate to produce trusted ICAR-CCARI treatment advice.")
     ])
 
     # =========================================================================
