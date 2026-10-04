@@ -20,9 +20,6 @@ load_dotenv(override=True)
 from weather_api import WeatherService, GOA_TALUKAS
 from crop_model import CropStressPredictor, CROPS_GROWTH_STAGES, STRESS_TYPES, AGRONOMIC_ADVISORIES
 from alerts import AlertManager
-import importlib
-import vision_model
-importlib.reload(vision_model)
 from vision_model import LeafDiseaseScanner
 import urllib.parse
 
@@ -295,10 +292,61 @@ def load_vision_scanner():
     return LeafDiseaseScanner(samples_dir="assets/samples")
 
 
-@st.cache_data(ttl=120)
+@st.cache_data(ttl=300, show_spinner=False)
 def fetch_all_talukas_weather(scenario: str, use_live: bool = False, api_key: str = None):
     svc = WeatherService(api_key=api_key, force_demo=not use_live)
     return svc.get_all_talukas_weather(scenario=scenario)
+
+
+@st.cache_data(ttl=300, show_spinner=False)
+def compute_all_taluka_assessments(scenario: str, use_live: bool = False, api_key: str = None):
+    svc = WeatherService(api_key=api_key, force_demo=not use_live)
+    talukas_df = svc.get_all_talukas_weather(scenario=scenario)
+    
+    predictor = load_ai_predictor()
+    assessments = []
+    for idx, row in talukas_df.iterrows():
+        primary_crop = row["primary_crops"][0] if row["primary_crops"] else "Rice (Paddy)"
+        g_stage = CROPS_GROWTH_STAGES.get(primary_crop, ["Vegetative"])[0]
+
+        input_payload = {
+            "taluka": row.get("taluka", "Tiswadi"),
+            "crop": primary_crop,
+            "growth_stage": g_stage,
+            "temperature_c": float(row.get("temperature_c", 28.0)),
+            "humidity_percent": int(row.get("humidity_percent", 75)),
+            "rainfall_mm": float(row.get("rainfall_mm", 0.0)),
+            "consecutive_dry_days": int(row.get("consecutive_dry_days", 0)),
+            "consecutive_wet_days": int(row.get("consecutive_wet_days", 0)),
+            "soil_moisture_percent": float(row.get("soil_moisture_percent", 60.0)),
+            "wind_speed_kmh": float(row.get("wind_speed_kmh", 15.0)),
+            "cloud_cover_percent": int(row.get("cloud_cover_percent", 50)),
+            "soil_ph": float(row.get("soil_ph", 5.4)),
+            "pest_pressure_index": float(row.get("pest_pressure_index", 3.0)),
+            "disease_pressure_index": float(row.get("disease_pressure_index", 3.0))
+        }
+        pred_res = predictor.predict(input_payload)
+        assessments.append({
+            **row.to_dict(),
+            "temperature_c": float(row.get("temperature_c", 28.0)),
+            "humidity_percent": int(row.get("humidity_percent", 75)),
+            "rainfall_mm": float(row.get("rainfall_mm", 0.0)),
+            "soil_moisture_percent": float(row.get("soil_moisture_percent", 65.0)),
+            "consecutive_dry_days": int(row.get("consecutive_dry_days", 0)),
+            "consecutive_wet_days": int(row.get("consecutive_wet_days", 0)),
+            "wind_speed_kmh": float(row.get("wind_speed_kmh", 15.0)),
+            "cloud_cover_percent": int(row.get("cloud_cover_percent", 50)),
+            "soil_ph": float(row.get("soil_ph", 5.2)),
+            "soil_type": row.get("soil_type", "Laterite (Acidic Loam)"),
+            "evaluated_crop": primary_crop,
+            "risk_level": pred_res["risk_level"],
+            "badge": pred_res["badge"],
+            "color": pred_res["color"],
+            "prob": pred_res["overall_probability"],
+            "top_concerns": pred_res["top_concerns"],
+            "action": pred_res["recommended_actions"][0] if pred_res["recommended_actions"] else "Routine care"
+        })
+    return pd.DataFrame(assessments)
 
 
 @st.cache_resource
@@ -585,67 +633,20 @@ if st.session_state["last_scenario"] != weather_scenario:
             </div>
         """, unsafe_allow_html=True)
 
-        prog_bar = st.progress(5, text="📡 Step 1/4: Ingesting microclimatic telemetry across 12 Talukas...")
-        time.sleep(0.28)
-        prog_bar.progress(40, text="🤖 Step 2/4: Running Random Forest Stress Classifiers & XAI Attribution...")
-        time.sleep(0.32)
-        prog_bar.progress(78, text="🌱 Step 3/4: Mapping ICAR-CCARI Protocols & Konkani (देवनागरी) Advisories...")
-        time.sleep(0.28)
+        prog_bar = st.progress(10, text="📡 Step 1/4: Ingesting microclimatic telemetry across 12 Talukas...")
+        time.sleep(0.06)
+        prog_bar.progress(45, text="🤖 Step 2/4: Running Random Forest Stress Classifiers & XAI Attribution...")
+        time.sleep(0.06)
+        prog_bar.progress(80, text="🌱 Step 3/4: Mapping ICAR-CCARI Protocols & Konkani (देवनागरी) Advisories...")
+        time.sleep(0.06)
         prog_bar.progress(100, text="✅ Step 4/4: Calibration Complete! Updating Geospatial Map & Vulnerability Watchlist...")
-        time.sleep(0.22)
+        time.sleep(0.04)
 
     loader_placeholder.empty()
 
-# Fetch current talukas data (Live API or High-Fidelity Simulation based on toggle)
+# Fetch current talukas assessments (Cached: evaluated in milliseconds)
 active_key = env_api_key if use_live_weather else None
-talukas_df = fetch_all_talukas_weather(weather_scenario, use_live=use_live_weather, api_key=active_key)
-
-# Evaluate predictions for all 12 talukas to generate command center metrics
-taluka_assessments = []
-for idx, row in talukas_df.iterrows():
-    # Pick first primary crop
-    primary_crop = row["primary_crops"][0] if row["primary_crops"] else "Rice (Paddy)"
-    g_stage = CROPS_GROWTH_STAGES.get(primary_crop, ["Vegetative"])[0]
-
-    input_payload = {
-        "taluka": row.get("taluka", "Tiswadi"),
-        "crop": primary_crop,
-        "growth_stage": g_stage,
-        "temperature_c": float(row.get("temperature_c", 28.0)),
-        "humidity_percent": int(row.get("humidity_percent", 75)),
-        "rainfall_mm": float(row.get("rainfall_mm", 0.0)),
-        "consecutive_dry_days": int(row.get("consecutive_dry_days", 0)),
-        "consecutive_wet_days": int(row.get("consecutive_wet_days", 0)),
-        "soil_moisture_percent": float(row.get("soil_moisture_percent", 60.0)),
-        "wind_speed_kmh": float(row.get("wind_speed_kmh", 15.0)),
-        "cloud_cover_percent": int(row.get("cloud_cover_percent", 50)),
-        "soil_ph": float(row.get("soil_ph", 5.4)),
-        "pest_pressure_index": float(row.get("pest_pressure_index", 3.0)),
-        "disease_pressure_index": float(row.get("disease_pressure_index", 3.0))
-    }
-    pred_res = predictor.predict(input_payload)
-    taluka_assessments.append({
-        **row.to_dict(),
-        "temperature_c": float(row.get("temperature_c", 28.0)),
-        "humidity_percent": int(row.get("humidity_percent", 75)),
-        "rainfall_mm": float(row.get("rainfall_mm", 0.0)),
-        "soil_moisture_percent": float(row.get("soil_moisture_percent", 65.0)),
-        "consecutive_dry_days": int(row.get("consecutive_dry_days", 0)),
-        "consecutive_wet_days": int(row.get("consecutive_wet_days", 0)),
-        "wind_speed_kmh": float(row.get("wind_speed_kmh", 15.0)),
-        "cloud_cover_percent": int(row.get("cloud_cover_percent", 50)),
-        "soil_ph": float(row.get("soil_ph", 5.2)),
-        "soil_type": row.get("soil_type", "Laterite (Acidic Loam)"),
-        "evaluated_crop": primary_crop,
-        "risk_level": pred_res["risk_level"],
-        "badge": pred_res["badge"],
-        "color": pred_res["color"],
-        "prob": pred_res["overall_probability"],
-        "top_concerns": pred_res["top_concerns"],
-        "action": pred_res["recommended_actions"][0] if pred_res["recommended_actions"] else "Routine care"
-    })
-
-eval_df = pd.DataFrame(taluka_assessments)
+eval_df = compute_all_taluka_assessments(weather_scenario, use_live=use_live_weather, api_key=active_key)
 
 # --- NAVIGATION TABS ---
 tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
@@ -771,7 +772,7 @@ with tab1:
             ).add_to(m)
 
         folium.LayerControl(position="topright").add_to(m)
-        st_folium(m, width="100%", height=520, returned_objects=[])
+        st_folium(m, width="100%", height=520, returned_objects=[], key="goa_command_map")
 
     with col_details:
         st.subheader(txt["watchlist_title"])
