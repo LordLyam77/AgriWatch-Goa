@@ -1689,28 +1689,78 @@ with tab6:
     st.subheader("🚨 Farmer Early-Warning SMS & WhatsApp Dispatcher")
     st.caption("Broadcast concise, actionable crop advisories to farmers even on basic 2G feature phones.")
 
+    # Initialize session state for SMS composer
+    if "sms_config" not in st.session_state:
+        st.session_state["sms_config"] = {
+            "taluka": list(GOA_TALUKAS.keys())[0],
+            "crop": list(CROPS_GROWTH_STAGES.keys())[0],
+            "stage": CROPS_GROWTH_STAGES[list(CROPS_GROWTH_STAGES.keys())[0]][1],
+            "phone": "+91-9822154321",
+            "lang": "English" if "English" in app_lang else ("Konkani" if "Konkani" in app_lang else "Hindi"),
+            "stresses": ["waterlog", "pest"]
+        }
+
     sms_col1, sms_col2 = st.columns([1.1, 1.2])
 
     with sms_col1:
-        st.markdown("#### ✍️ Compose Farmer Advisory")
-        alert_taluka = st.selectbox("Dispatch Taluka", options=list(GOA_TALUKAS.keys()), key="alt_taluka", index=0)
-        alert_crop = st.selectbox("Crop Variety", options=list(CROPS_GROWTH_STAGES.keys()), key="alt_crop", index=0)
-        alert_stage = st.selectbox("Growth Stage", options=CROPS_GROWTH_STAGES[alert_crop], key="alt_stage", index=1)
-        alert_phone = st.text_input("Farmer Mobile Number", value="+91-9822154321")
-        default_lang_idx = 1 if "Konkani" in app_lang else (2 if "Hindi" in app_lang else 0)
-        alert_lang = st.radio("Advisory Language / भास", options=["English", "Konkani", "Hindi", "Marathi"], index=default_lang_idx, horizontal=True)
+        with st.form("sms_compose_form"):
+            st.markdown("#### ✍️ Compose Farmer Advisory")
+            cur_t = st.session_state["sms_config"]["taluka"]
+            t_idx = list(GOA_TALUKAS.keys()).index(cur_t) if cur_t in GOA_TALUKAS else 0
+            alert_taluka = st.selectbox("Dispatch Taluka", options=list(GOA_TALUKAS.keys()), index=t_idx)
 
-        selected_stress = st.multiselect(
-            "Active Stress Types to Address",
-            options=STRESS_TYPES,
-            default=["waterlog", "pest"]
-        )
+            cur_c = st.session_state["sms_config"]["crop"]
+            c_idx = list(CROPS_GROWTH_STAGES.keys()).index(cur_c) if cur_c in CROPS_GROWTH_STAGES else 0
+            alert_crop = st.selectbox("Crop Variety", options=list(CROPS_GROWTH_STAGES.keys()), index=c_idx)
+
+            available_stages = CROPS_GROWTH_STAGES.get(alert_crop, ["Vegetative"])
+            cur_s = st.session_state["sms_config"]["stage"]
+            s_idx = available_stages.index(cur_s) if cur_s in available_stages else 0
+            alert_stage = st.selectbox("Growth Stage", options=available_stages, index=s_idx)
+
+            alert_phone = st.text_input("Farmer Mobile Number", value=st.session_state["sms_config"]["phone"])
+
+            lang_options = ["English", "Konkani", "Hindi", "Marathi"]
+            cur_l = st.session_state["sms_config"]["lang"]
+            l_idx = lang_options.index(cur_l) if cur_l in lang_options else 0
+            alert_lang = st.radio("Advisory Language / भास", options=lang_options, index=l_idx, horizontal=True)
+
+            selected_stress = st.multiselect(
+                "Active Stress Types to Address",
+                options=STRESS_TYPES,
+                default=st.session_state["sms_config"]["stresses"]
+            )
+
+            st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
+            confirm_preview = st.form_submit_button("📋 Confirm Inputs & Update Advisory", type="primary", use_container_width=True)
+
+        if confirm_preview:
+            st.session_state["sms_config"] = {
+                "taluka": alert_taluka,
+                "crop": alert_crop,
+                "stage": alert_stage,
+                "phone": alert_phone,
+                "lang": alert_lang,
+                "stresses": selected_stress
+            }
+
+        cfg = st.session_state["sms_config"]
+
+        # Fetch real-time weather summary for this taluka if available in eval_df
+        t_matches = eval_df[eval_df["taluka"] == cfg["taluka"]]
+        if not t_matches.empty:
+            t_row = t_matches.iloc[0]
+            w_summary = f"Rain {t_row['rainfall_mm']}mm, Temp {t_row['temperature_c']}°C, Soil {t_row['soil_moisture_percent']}%"
+            r_level = t_row["risk_level"]
+        else:
+            w_summary = "Monsoon Rain 120mm, Soil Moist 92%"
+            r_level = "HIGH STRESS ALERT"
 
         custom_actions = []
         k_text = ""
         h_text = ""
         m_text = ""
-        for s in selected_stress:
+        for s in cfg["stresses"]:
             info = AGRONOMIC_ADVISORIES.get(s, {})
             custom_actions.extend(info.get("actions", [])[:1])
             if "konkani" in info:
@@ -1721,28 +1771,29 @@ with tab6:
                 m_text += " " + info["marathi"]
 
         formatted_sms = alert_mgr.format_advisory(
-            taluka=alert_taluka,
-            crop=alert_crop,
-            growth_stage=alert_stage,
-            risk_level="HIGH STRESS ALERT",
-            stress_types=selected_stress,
-            weather_summary="Monsoon Rain 120mm, Soil Moist 92%",
+            taluka=cfg["taluka"],
+            crop=cfg["crop"],
+            growth_stage=cfg["stage"],
+            risk_level=r_level,
+            stress_types=cfg["stresses"],
+            weather_summary=w_summary,
             recommended_actions=custom_actions,
-            language=alert_lang,
+            language=cfg["lang"],
             konkani_text=k_text.strip(),
             hindi_text=h_text.strip(),
             marathi_text=m_text.strip()
         )
 
-        if st.button("🚀 Dispatch SMS / WhatsApp Advisory", type="primary", use_container_width=True):
+        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+        if st.button("🚀 Dispatch SMS to Farmer Device", type="secondary", use_container_width=True):
             dispatch_res = alert_mgr.dispatch_alert(
-                phone_number=alert_phone,
+                phone_number=cfg["phone"],
                 message=formatted_sms,
-                taluka=alert_taluka,
-                crop=alert_crop,
-                risk_level="HIGH STRESS ALERT",
-                stress_types=selected_stress,
-                language=alert_lang,
+                taluka=cfg["taluka"],
+                crop=cfg["crop"],
+                risk_level=r_level,
+                stress_types=cfg["stresses"],
+                language=cfg["lang"],
                 force_demo=True
             )
             st.success(f"Advisory successfully dispatched via {dispatch_res['channel']}! Status: {dispatch_res['status']}")
