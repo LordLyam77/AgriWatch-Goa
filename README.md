@@ -16,7 +16,7 @@ Traditional agricultural assistance is **reactive**—intervening only after vis
 - Provides **Explainable AI (XAI)** decomposition showing exact meteorological drivers.
 - Automatically pairs alerts with verified **ICAR-CCARI (Old Goa)** treatment protocols in **English, Konkani (गोंयची राजभास), and Hindi**.
 - Integrates a **Multi-Modal Computer Vision Leaf Disease Scanner** fusing visual lesion detection with live microclimate risk.
-- Dispatches actionable advisory alerts via **2G SMS** and **WhatsApp**, complete with printable **Kisan Health Cards**.
+- Dispatches actionable advisory alerts via **2G SMS** and **WhatsApp**, complete with printable **Official Kisan Health Cards**.
 
 ---
 
@@ -65,7 +65,7 @@ Traditional agricultural assistance is **reactive**—intervening only after vis
 1. **🌾 Goa Command Center:** Real-time monitoring across all 12 talukas with interactive Folium geospatial maps and vulnerability watchlists.
 2. **🧪 AI Stress Simulator & XAI:** Reactive "What-If" sandbox with interactive environmental sliders, radar hazard decomposition, and feature attribution.
 3. **📸 Leaf Disease Vision AI:** Computer vision necrotic lesion segmentation fused with real-time weather context for Rice Blast, Cashew Dieback, and Coconut Bud Rot.
-4. **📄 Kisan Health Card:** Certified agro-meteorological advisory certificate with QR code for ZAO subsidy checks and PMFBY crop insurance claims.
+4. **📄 Official Kisan Health Card:** Certified agro-meteorological advisory certificate with QR code for ZAO subsidy checks and PMFBY crop insurance claims.
 5. **📈 5-Day Agro Forecast:** Predictive microclimate trend charts for soil moisture, temperature-humidity risk zones, and rainfall accumulation.
 6. **🚨 Farm Advisory & SMS Dispatcher:** Multi-channel SMS generator formatted for 2G feature phones with one-click WhatsApp village group sharing and CSV audit logging.
 7. **🛡️ Responsible AI & Ethics:** 100% compliant with India's **DPDP Act 2023** (zero citizen PII collected), taluka-level fairness audit, and hackathon AI tool disclosures.

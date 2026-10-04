@@ -251,7 +251,7 @@ def create_deck():
 
     add_card(s4, 8.8, 1.8, 3.7, 5.0, "3. Multi-Channel Delivery", [
         ("Streamlit Command Center:", "8 interactive glassmorphic tabs with Folium GIS maps and Plotly graphs."),
-        ("Kisan Health Card:", "Printable PDF certificate with serial ID and verification QR."),
+        ("Kisan Health Card:", "Official printable PDF certificate with serial ID and verification QR."),
         ("2G SMS Dispatcher:", "Concise SMS alerts via Twilio and WhatsApp group deep-links."),
         ("CSV Audit Trail:", "Immutable dispatch history for government accountability.")
     ], header_color=C_AMBER)
@@ -295,11 +295,11 @@ def create_deck():
     )
 
     # =========================================================================
-    # SLIDE 6: Speaker 2 - Tab 4: Kisan Health Card & Vulnerability Advisory
+    # SLIDE 6: Speaker 2 - Tab 4: The Official Kisan Crop Health Card
     # =========================================================================
     s6 = prs.slides.add_slide(blank_layout)
     add_bg(s6)
-    add_header(s6, "Speaker 2", "Tab 4: Kisan Health Card & Vulnerability Advisory",
+    add_header(s6, "Speaker 2", "Tab 4: Official Kisan Crop Health & Vulnerability Card",
                "A certified, printable agro-meteorological advisory certificate for Goan farmers", "Public-Service & Feasibility (25 Marks)")
 
     add_card(s6, 0.8, 1.8, 5.6, 5.0, "📄 The Digital-to-Physical Bridge", [
@@ -317,7 +317,7 @@ def create_deck():
 
     s6.notes_slide.notes_text_frame.text = (
         "SPEAKER 2 CUE:\n"
-        "Tab 4 generates a certified Kisan Health Card. "
+        "Tab 4 generates an official, certified Kisan Crop Health Card. "
         "It solves a massive bureaucratic gap: when unseasonal rains ruin a crop, farmers struggle to prove weather stress to insurance agents. "
         "This printable card provides timestamped meteorological telemetry, a unique serial ID, QR code, and an AI health grade "
         "that fast-tracks PMFBY insurance payouts and ZAO subsidy verification. Now Speaker 3 will reveal our AI brain."
@@ -500,13 +500,8 @@ def create_deck():
     )
 
     out_file = "AgriWatch_Goa_Presentation.pptx"
-    try:
-        prs.save(out_file)
-        print(f"Presentation saved successfully to: {out_file}")
-    except PermissionError:
-        fallback = "AgriWatch_Goa_Presentation_Updated.pptx"
-        prs.save(fallback)
-        print(f"AgriWatch_Goa_Presentation.pptx is currently open in a presentation viewer (WPS/PowerPoint). Saved updated deck to: {fallback}")
+    prs.save(out_file)
+    print(f"Presentation saved successfully to: {out_file}")
 
 if __name__ == "__main__":
     create_deck()

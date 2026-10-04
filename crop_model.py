@@ -5,6 +5,9 @@ and ICAR-CCARI (Central Coastal Agricultural Research Institute, Goa) recommenda
 """
 
 import os
+import warnings
+warnings.filterwarnings("ignore")
+
 import joblib
 import pandas as pd
 import numpy as np
@@ -215,6 +218,19 @@ class CropStressPredictor:
         self.scaler = joblib.load(os.path.join(self.models_dir, "scaler.joblib"))
         self.feature_columns = joblib.load(os.path.join(self.models_dir, "features.joblib"))
         self.metrics = joblib.load(os.path.join(self.models_dir, "metrics.joblib"))
+
+        # Optimize for ultra-fast single-instance inference without worker spawning
+        if hasattr(self.overall_model, "set_params"):
+            try:
+                self.overall_model.set_params(n_jobs=1)
+            except Exception:
+                pass
+        for s_clf in self.sub_models.values():
+            if hasattr(s_clf, "set_params"):
+                try:
+                    s_clf.set_params(n_jobs=1)
+                except Exception:
+                    pass
         return True
 
     def predict(self, input_data: dict) -> dict:

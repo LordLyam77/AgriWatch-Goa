@@ -6,6 +6,9 @@ Rosary College of Commerce & Arts | DITEC · SITPC · DHE, Government of Goa
 
 import os
 import time
+import warnings
+warnings.filterwarnings("ignore")
+
 import folium
 import numpy as np
 import pandas as pd
@@ -213,7 +216,7 @@ st.markdown("""
         cursor: pointer;
     }
 
-    /* Kisan Health Card Styling */
+    /* Official Kisan Health Card Styling */
     .kisan-card-container {
         background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
         color: #0f172a;
@@ -365,7 +368,7 @@ I18N = {
         "tab_command": "🌾 Goa Command Center",
         "tab_simulator": "🧪 AI Stress Simulator & XAI",
         "tab_scanner": "📸 Leaf Disease Vision AI",
-        "tab_card": "📄 Kisan Health Card",
+        "tab_card": "📄 Official Kisan Health Card",
         "tab_forecast": "📈 5-Day Agro Forecast",
         "tab_alerts": "🚨 Farm Advisory & SMS",
         "tab_ethics": "🛡️ Responsible AI & Ethics",
@@ -395,7 +398,7 @@ I18N = {
         "wa_share_btn": "📲 Share Advisory to Village WhatsApp Group",
         "scanner_title": "📸 Multi-Modal Leaf Visual Disease Scanner",
         "scanner_caption": "Fuses computer vision colorimetry & necrotic lesion detection with real-time Goa taluka microclimates for enhanced diagnostic accuracy.",
-        "card_title": "📄 Kisan Health Card & Vulnerability Advisory",
+        "card_title": "📄 Official Kisan Crop Health & Vulnerability Card",
         "card_caption": "Certified agro-meteorological advisory card for ZAO subsidy verification, PMFBY crop insurance claims, and village panchayat records."
     },
     "कोंकणी (Konkani)": {
@@ -437,8 +440,8 @@ I18N = {
         "wa_share_btn": "📲 गांवाच्या व्हॉट्सॲप (WhatsApp) ग्रुपाचेर सल्लो वाटा",
         "scanner_title": "📸 मल्टी-मॉडल पानां रोग तपासणी स्कॅनर",
         "scanner_caption": "पानांच्या फोटोचेर आदारित AI आणि गोंयच्या हवामानाचे एकत्रीकरण करून अचूक रोग निदान करा.",
-        "card_title": "📄 शेतकरी पीक आरोग्य पत्रिका (Kisan Health Card)",
-        "card_caption": "शेतकी खाते (Directorate of Agriculture) व ICAR-CCARI मान्यताप्राप्त आरोग्य पत्रिका."
+        "card_title": "📄 अधिकृत शेतकरी पीक आरोग्य पत्रिका (Kisan Health Card)",
+        "card_caption": "शेतकी खाते (Directorate of Agriculture) व ICAR-CCARI मान्यताप्राप्त अधिकृत आरोग्य पत्रिका."
     },
     "हिन्दी (Hindi)": {
         "app_title": "🌾 AgriWatch Goa — AI फसल तनाव पहचान एवं किसान पूर्व-चेतावनी प्रणाली",
@@ -449,7 +452,7 @@ I18N = {
         "tab_command": "🌾 गोवा कमान केंद्र",
         "tab_simulator": "🧪 AI तनाव सिम्युलेटर एवं XAI",
         "tab_scanner": "📸 पत्ती रोग स्कैनर (Vision AI)",
-        "tab_card": "📄 किसान स्वास्थ्य कार्ड",
+        "tab_card": "📄 आधिकारिक किसान स्वास्थ्य कार्ड",
         "tab_forecast": "📈 ५-दिवसीय मौसम पूर्वानुमान",
         "tab_alerts": "🚨 किसान सलाह व SMS संदेश",
         "tab_ethics": "🛡️ जिम्मेदार AI एवं नैतिकता",
@@ -479,8 +482,8 @@ I18N = {
         "wa_share_btn": "📲 गाँव के व्हाट्सएप (WhatsApp) ग्रुप पर साझा करें",
         "scanner_title": "📸 मल्टी-मॉडल पत्ती रोग दृश्य स्कैनर",
         "scanner_subtitle": "पत्ती के चित्रों का कंप्यूटर विज़न विश्लेषण और वास्तविक समय गोवा मौसम का संलयन।",
-        "card_title": "📄 किसान स्वास्थ्य कार्ड (Kisan Health Card)",
-        "card_caption": "कृषि निदेशालय (Goa) एवं ICAR-CCARI प्रमाणित फसल स्वास्थ्य प्रमाणपत्र।"
+        "card_title": "📄 आधिकारिक किसान फसल स्वास्थ्य एवं भेद्यता कार्ड",
+        "card_caption": "कृषि निदेशालय (Goa) एवं ICAR-CCARI प्रमाणित आधिकारिक फसल स्वास्थ्य प्रमाणपत्र।"
     }
 }
 
@@ -1341,7 +1344,7 @@ with tab3:
 
 
 # ==============================================================================
-# TAB 4: 📄 PRINTABLE KISAN HEALTH CARD
+# TAB 4: 📄 PRINTABLE OFFICIAL KISAN CROP HEALTH CARD
 # ==============================================================================
 with tab4:
     st.markdown(f"""
@@ -1422,7 +1425,7 @@ with tab4:
     card_id = f"GOA-KISAN-2026-{card_taluka[:3].upper()}-{abs(hash(card_farmer + card_taluka)) % 9000 + 1000}"
     current_date_str = time.strftime("%d %B %Y")
 
-    # Render Printable Certificate Card (Cleaned to prevent Markdown code block parsing)
+    # Render Official Printable Certificate Card (Cleaned to prevent Markdown code block parsing)
     card_html_raw = f"""
 <div class="kisan-card-container" id="kisan-card-print">
 <div class="kisan-header">
@@ -1434,7 +1437,7 @@ Government of Goa • Directorate of Agriculture
 In Technical Collaboration with ICAR - Central Coastal Agricultural Research Institute (CCARI), Old Goa
 </div>
 <div style="font-size: 1.25rem; font-weight: 800; color: #0F172A; margin-top: 8px; border-top: 1px solid #CBD5E1; padding-top: 6px;">
-KISAN HEALTH CARD & VULNERABILITY ADVISORY
+OFFICIAL KISAN CROP HEALTH & VULNERABILITY ADVISORY CARD
 </div>
 <div style="font-size: 0.88rem; font-weight: 600; color: #64748B;">
 शेतकरी पीक आरोग्य व हवामान ताण पत्रिका
@@ -1572,14 +1575,14 @@ Zonal Agricultural Officer (ZAO)
                     align-items: center;
                     gap: 8px;
                 ">
-                    🖨️ Print / Save Kisan Health Card (PDF)
+                    🖨️ Print / Save Official Health Card (PDF)
                 </button>
             </div>
         """, height=55)
 
     with p_col2:
         card_summary_txt = f"""GOVERNMENT OF GOA - DIRECTORATE OF AGRICULTURE
-KISAN HEALTH CARD & VULNERABILITY ADVISORY
+OFFICIAL KISAN CROP HEALTH & VULNERABILITY ADVISORY CARD
 Card ID: {card_id} | Date: {current_date_str}
 ============================================================
 Farmer: {card_farmer}
