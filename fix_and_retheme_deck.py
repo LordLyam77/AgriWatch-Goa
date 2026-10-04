@@ -662,6 +662,81 @@ def build_deck():
     add_banner(s10, 0.8, 5.75, 11.75, 1.15, "🌾",
                "A warning is useful only if it reaches the farmer. By pairing 2G SMS with native Konkani advisories, AgriWatch Goa ensures that no smallholder farmer is left behind.")
 
+    # =========================================================================
+    # SLIDE 11: Responsible AI (Built for Safe Public-Sector Use)
+    # =========================================================================
+    s11 = prs.slides.add_slide(blank_layout)
+    set_slide_bg(s11, C_BG_LIGHT)
+    add_header(s11, "Responsible AI: Built for Safe Public-Sector Use",
+               "Ethical AI governance, transparency, and data privacy tailored for public agriculture")
+
+    # 4 Pillars arranged as 2x2 Grid (left 0.8 & 6.8, top 1.60 & 3.75, height 1.95)
+    add_card(s11, 0.8, 1.60, 5.7, 1.95, "🔒 Data Privacy & Minimal Collection", [
+        ("Minimal Data Footprint:", "The prototype minimizes personal-data collection, processing only environmental telemetry and anonymous parcel coordinates."),
+        ("No Farmer Surveillance:", "Does not harvest sensitive personal credentials or financial records, ensuring strict public-sector data privacy compliance.")
+    ])
+
+    add_card(s11, 6.8, 1.60, 5.7, 1.95, "🔍 Full Model Explainability (XAI)", [
+        ("Feature Importance Attribution:", "Every prediction includes transparent feature-importance information (Gini impurity weights & radar plots)."),
+        ("No Black Box AI:", "Agricultural officers see exactly which environmental variables (e.g. soil moisture, dry streaks) drove the risk alert.")
+    ])
+
+    add_card(s11, 0.8, 3.75, 5.7, 1.95, "👨‍🌾 Human-in-the-Loop Governance", [
+        ("Decision Support, Not Replacement:", "AI provides decision support; agriculture officers and ZAO experts remain responsible for final advisory decisions."),
+        ("Manual Override & Verification:", "Officers review, modify, or approve automated hazard warnings before bulk dispatch to village farmers.")
+    ])
+
+    add_card(s11, 6.8, 3.75, 5.7, 1.95, "📊 Open Transparency & Disclosure", [
+        ("Disclosed Training Data:", "Synthetic training datasets and model boundaries are explicitly disclosed to prevent false claims."),
+        ("Auditable Technology Stack:", "Open architecture built on Scikit-learn, Python, and ICAR agronomy guidelines with full audit logging.")
+    ])
+
+    add_banner(s11, 0.8, 5.90, 11.7, 1.10, "⚖️",
+               "The system is designed as an agricultural decision-support tool, not an autonomous decision-maker. Agricultural officers remain responsible for final validation.")
+
+    # =========================================================================
+    # SLIDE 12: Future Deployment & Scaling Roadmap
+    # =========================================================================
+    s12 = prs.slides.add_slide(blank_layout)
+    set_slide_bg(s12, C_BG_LIGHT)
+    add_header(s12, "Future Deployment: From Hackathon Prototype to Goa-Wide Platform",
+               "A phased implementation roadmap and expansion blueprint for state-wide agricultural integration")
+
+    # Left Column: 3-Phase Deployment Roadmap (width 5.7, top 1.55)
+    add_card(s12, 0.8, 1.55, 5.7, 1.25, "🌱 Phase 1 — Institutional Pilot (Months 1–3)", [
+        ("Pilot Deployment:", "Deploy at ZAO (Zonal Agricultural Offices) and agricultural institutions (ICAR-CCARI Old Goa)."),
+        ("Model Calibration:", "Field-validate synthetic models against actual Goan monsoon crop seasons.")
+    ])
+
+    add_card(s12, 0.8, 2.95, 5.7, 1.25, "🏛️ Phase 2 — Community Access (Months 4–6)", [
+        ("Panchayat Kiosks:", "Integrate into 190+ Village Panchayat e-Gram kiosks across Goa."),
+        ("Walk-in Services:", "Enable printable Kisan Cards and train Krishi Mitras for local farmer onboarding.")
+    ])
+
+    add_card(s12, 0.8, 4.35, 5.7, 1.25, "📱 Phase 3 — Farmer Outreach (Months 7–12)", [
+        ("Multi-Channel Delivery:", "Scale automated 2G SMS alerts, WhatsApp village broadcasts & Krishi call-centre integration."),
+        ("State-Wide Coverage:", "Reach smallholder farmers across all 12 Talukas in native Konkani (देवनागरी).")
+    ])
+
+    # Right Column: Future Technical Improvements (width 5.7, top 1.55, height 4.05)
+    add_card(s12, 6.8, 1.55, 5.7, 4.05, "🚀 Future Improvements & Expansion Blueprint", [
+        ("📡 Real Farm Sensor Data:", "Deploy IoT capacitive soil moisture, temperature & humidity probes in Khazan and Morod lands."),
+        ("🛰️ Satellite / NDVI Integration:", "Integrate Sentinel-2 / Landsat multispectral imagery for regional crop canopy stress mapping."),
+        ("📊 Larger Real-World Datasets:", "Expand from synthetic datasets to multi-year historical climate and harvest yield data across Goa."),
+        ("🔬 Field Validation with Experts:", "Partner with ICAR-CCARI scientists and Goa Directorate of Agriculture for rigorous field verification."),
+        ("🌿 Improved Disease Models:", "Train deep learning computer vision on larger Goan foliar datasets (Cashew Shoot Blight, Arecanut Koleroga)."),
+        ("🏛️ Government System Integration:", "Connect with PMFBY crop insurance portals and Goa Krishi Card database for automatic subsidy verification.")
+    ])
+
+    # Bottom Row: Key Closing Mission Statement + Thank You Box
+    add_banner(s12, 0.8, 5.80, 8.5, 1.25, "🌾",
+               "“AgriWatch Goa bridges AI and agriculture by turning environmental data into early warnings that help farmers act before crop stress becomes crop loss.”")
+
+    add_card(s12, 9.55, 5.80, 2.95, 1.25, "🙏 Thank You!", [
+        ("AgriWatch Goa:", "Sankalp Setu 2026"),
+        ("Live Demo:", "Q&A & Discussion")
+    ], bg_color=RGBColor(16, 52, 34), border_color=C_GOLD_HARVEST, title_color=C_GOLD_HARVEST, dark_mode=True)
+
     # Save
     out_file = "AI-Powered-Crop-Stress-Detection-and-Farm-Early-Warning-Platform.pptx"
     try:
