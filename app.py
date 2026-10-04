@@ -869,64 +869,100 @@ with tab2:
         </div>
     """, unsafe_allow_html=True)
 
+    # Initialize session state for simulator inputs
+    if "sim_input" not in st.session_state:
+        st.session_state["sim_input"] = {
+            "taluka": "Ponda",
+            "crop": "Rice (Paddy)",
+            "growth_stage": "Tillering",
+            "temperature_c": 28.5,
+            "humidity_percent": 88,
+            "rainfall_mm": 95.0,
+            "consecutive_dry_days": 0,
+            "consecutive_wet_days": 5,
+            "soil_moisture_percent": 85.0,
+            "wind_speed_kmh": 28.0,
+            "cloud_cover_percent": 85,
+            "soil_ph": 5.2,
+            "pest_pressure_index": 6.5,
+            "disease_pressure_index": 7.0
+        }
+
     sim_col1, sim_col2 = st.columns([1.1, 1.3])
 
     with sim_col1:
-        st.markdown("#### 1. Select Crop & Geographic Location")
-        c1, c2 = st.columns(2)
-        with c1:
-            sim_crop = st.selectbox(txt["sim_crop"], options=list(CROPS_GROWTH_STAGES.keys()), index=0)
-        with c2:
-            sim_taluka = st.selectbox(txt["sim_taluka"], options=list(GOA_TALUKAS.keys()), index=3)  # Ponda
+        with st.form("simulator_form"):
+            st.markdown("#### 1. Select Crop & Geographic Location")
+            c1, c2 = st.columns(2)
+            with c1:
+                cur_crop = st.session_state["sim_input"]["crop"]
+                crop_idx = list(CROPS_GROWTH_STAGES.keys()).index(cur_crop) if cur_crop in CROPS_GROWTH_STAGES else 0
+                sim_crop = st.selectbox(txt["sim_crop"], options=list(CROPS_GROWTH_STAGES.keys()), index=crop_idx)
+            with c2:
+                cur_taluka = st.session_state["sim_input"]["taluka"]
+                taluka_idx = list(GOA_TALUKAS.keys()).index(cur_taluka) if cur_taluka in GOA_TALUKAS else 3
+                sim_taluka = st.selectbox(txt["sim_taluka"], options=list(GOA_TALUKAS.keys()), index=taluka_idx)
 
-        sim_stage = st.selectbox(txt["sim_stage"], options=CROPS_GROWTH_STAGES[sim_crop], index=1)
+            cur_stage = st.session_state["sim_input"]["growth_stage"]
+            available_stages = CROPS_GROWTH_STAGES.get(sim_crop, ["Vegetative"])
+            stage_idx = available_stages.index(cur_stage) if cur_stage in available_stages else 0
+            sim_stage = st.selectbox(txt["sim_stage"], options=available_stages, index=stage_idx)
 
-        st.markdown("#### 2. Microclimatic & Soil Conditions")
-        sim_temp = st.slider(txt["sim_temp"], min_value=18.0, max_value=44.0, value=28.5, step=0.5)
-        sim_humidity = st.slider(txt["sim_hum"], min_value=25, max_value=100, value=88, step=1)
-        sim_rainfall = st.slider(txt["sim_rain"], min_value=0.0, max_value=350.0, value=95.0, step=5.0)
+            st.markdown("#### 2. Microclimatic & Soil Conditions")
+            sim_temp = st.slider(txt["sim_temp"], min_value=18.0, max_value=44.0, value=float(st.session_state["sim_input"]["temperature_c"]), step=0.5)
+            sim_humidity = st.slider(txt["sim_hum"], min_value=25, max_value=100, value=int(st.session_state["sim_input"]["humidity_percent"]), step=1)
+            sim_rainfall = st.slider(txt["sim_rain"], min_value=0.0, max_value=350.0, value=float(st.session_state["sim_input"]["rainfall_mm"]), step=5.0)
 
-        s_col_a, s_col_b = st.columns(2)
-        with s_col_a:
-            sim_dry_days = st.number_input("Consecutive Dry Days", min_value=0, max_value=35, value=0)
-            sim_soil_moist = st.slider(txt["sim_soil_moist"], min_value=10.0, max_value=100.0, value=85.0, step=1.0)
-            sim_pest_idx = st.slider("Pest Pressure (0-10)", min_value=0.0, max_value=10.0, value=6.5, step=0.5)
-        with s_col_b:
-            sim_wet_days = st.number_input("Consecutive Wet Days", min_value=0, max_value=25, value=5)
-            sim_soil_ph = st.slider("Soil pH (Goa Laterite)", min_value=4.0, max_value=8.0, value=5.2, step=0.1)
-            sim_dis_idx = st.slider("Disease Pressure (0-10)", min_value=0.0, max_value=10.0, value=7.0, step=0.5)
+            s_col_a, s_col_b = st.columns(2)
+            with s_col_a:
+                sim_dry_days = st.number_input("Consecutive Dry Days", min_value=0, max_value=35, value=int(st.session_state["sim_input"]["consecutive_dry_days"]))
+                sim_soil_moist = st.slider(txt["sim_soil_moist"], min_value=10.0, max_value=100.0, value=float(st.session_state["sim_input"]["soil_moisture_percent"]), step=1.0)
+                sim_pest_idx = st.slider("Pest Pressure (0-10)", min_value=0.0, max_value=10.0, value=float(st.session_state["sim_input"]["pest_pressure_index"]), step=0.5)
+            with s_col_b:
+                sim_wet_days = st.number_input("Consecutive Wet Days", min_value=0, max_value=25, value=int(st.session_state["sim_input"]["consecutive_wet_days"]))
+                sim_soil_ph = st.slider("Soil pH (Goa Laterite)", min_value=4.0, max_value=8.0, value=float(st.session_state["sim_input"]["soil_ph"]), step=0.1)
+                sim_dis_idx = st.slider("Disease Pressure (0-10)", min_value=0.0, max_value=10.0, value=float(st.session_state["sim_input"]["disease_pressure_index"]), step=0.5)
 
-        sim_wind = st.slider("Wind Speed (km/h)", min_value=5.0, max_value=70.0, value=28.0, step=2.0)
-        sim_clouds = st.slider("Cloud Cover (%)", min_value=0, max_value=100, value=85, step=5)
+            sim_wind = st.slider("Wind Speed (km/h)", min_value=5.0, max_value=70.0, value=float(st.session_state["sim_input"]["wind_speed_kmh"]), step=2.0)
+            sim_clouds = st.slider("Cloud Cover (%)", min_value=0, max_value=100, value=int(st.session_state["sim_input"]["cloud_cover_percent"]), step=5)
+
+            st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+            submitted_sim = st.form_submit_button(
+                "⚡ Confirm Inputs & Run AI Stress Simulation",
+                type="primary",
+                use_container_width=True
+            )
+
+        if submitted_sim:
+            st.session_state["sim_input"] = {
+                "taluka": sim_taluka,
+                "crop": sim_crop,
+                "growth_stage": sim_stage,
+                "temperature_c": sim_temp,
+                "humidity_percent": sim_humidity,
+                "rainfall_mm": sim_rainfall,
+                "consecutive_dry_days": sim_dry_days,
+                "consecutive_wet_days": sim_wet_days,
+                "soil_moisture_percent": sim_soil_moist,
+                "wind_speed_kmh": sim_wind,
+                "cloud_cover_percent": sim_clouds,
+                "soil_ph": sim_soil_ph,
+                "pest_pressure_index": sim_pest_idx,
+                "disease_pressure_index": sim_dis_idx
+            }
 
     with sim_col2:
         st.markdown(f"#### {txt['sim_diag_output']}")
 
-        # Run Prediction
-        sim_input = {
-            "taluka": sim_taluka,
-            "crop": sim_crop,
-            "growth_stage": sim_stage,
-            "temperature_c": sim_temp,
-            "humidity_percent": sim_humidity,
-            "rainfall_mm": sim_rainfall,
-            "consecutive_dry_days": sim_dry_days,
-            "consecutive_wet_days": sim_wet_days,
-            "soil_moisture_percent": sim_soil_moist,
-            "wind_speed_kmh": sim_wind,
-            "cloud_cover_percent": sim_clouds,
-            "soil_ph": sim_soil_ph,
-            "pest_pressure_index": sim_pest_idx,
-            "disease_pressure_index": sim_dis_idx
-        }
-
-        sim_res = predictor.predict(sim_input)
+        # Retrieve active payload
+        sim_payload = st.session_state["sim_input"]
+        sim_res = predictor.predict(sim_payload)
 
         # Big Risk Card Banner
         st.markdown(f"""
             <div class="glass-card" style="border: 2px solid {sim_res['color']}; text-align: center; padding: 20px;">
                 <div style="font-size: 0.85rem; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.08em;">
-                    AI Stress Diagnosis for {sim_crop} in {sim_taluka}
+                    AI Stress Diagnosis for {sim_payload['crop']} in {sim_payload['taluka']}
                 </div>
                 <h2 style="color: {sim_res['color']}; margin: 8px 0; font-size: 2.2rem;">
                     {sim_res['badge']}
@@ -1317,16 +1353,19 @@ with tab4:
         </div>
     """, unsafe_allow_html=True)
 
-    # Card Configuration Controls
-    ctrl_col1, ctrl_col2, ctrl_col3, ctrl_col4 = st.columns(4)
-    with ctrl_col1:
-        card_taluka = st.selectbox("Select Taluka", options=list(GOA_TALUKAS.keys()), key="kc_taluka", index=0)
-    with ctrl_col2:
-        card_crop = st.selectbox("Select Crop", options=list(CROPS_GROWTH_STAGES.keys()), key="kc_crop", index=0)
-    with ctrl_col3:
-        card_farmer = st.text_input("Farmer Name", value="Shri Digambar Naik")
-    with ctrl_col4:
-        card_survey = st.text_input("Survey / Parcel No.", value="Sy. No. 142/3 (Khazan Land)")
+    # Card Configuration Controls Form
+    with st.form("kisan_card_form"):
+        ctrl_col1, ctrl_col2, ctrl_col3, ctrl_col4 = st.columns(4)
+        with ctrl_col1:
+            card_taluka = st.selectbox("Select Taluka", options=list(GOA_TALUKAS.keys()), index=0)
+        with ctrl_col2:
+            card_crop = st.selectbox("Select Crop", options=list(CROPS_GROWTH_STAGES.keys()), index=0)
+        with ctrl_col3:
+            card_farmer = st.text_input("Farmer Name", value="Shri Digambar Naik")
+        with ctrl_col4:
+            card_survey = st.text_input("Survey / Parcel No.", value="Sy. No. 142/3 (Khazan Land)")
+
+        card_submitted = st.form_submit_button("📋 Confirm Details & Generate Health Card", type="primary", use_container_width=True)
 
     # Fetch assessment for this specific taluka and crop safely
     taluka_matches = eval_df[eval_df["taluka"] == card_taluka]
